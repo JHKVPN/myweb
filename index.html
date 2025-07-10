@@ -6,11 +6,11 @@
   <title>VPS Plans</title>
   <style>
     body {
+      margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: #0f0f0f;
+      background: #0d0d0d;
       color: #eee;
       padding: 20px;
-      margin: 0;
     }
     h1 {
       text-align: center;
@@ -19,15 +19,21 @@
     }
     .provider {
       background: #1a1a1a;
-      border: 1px solid #333;
       border-radius: 12px;
       padding: 20px;
       margin-bottom: 25px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      animation: fadeIn 0.7s ease-in-out;
+    }
+    .provider h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
     .provider img.logo {
       height: 28px;
-      vertical-align: middle;
-      margin-right: 10px;
     }
     table {
       width: 100%;
@@ -38,6 +44,9 @@
       padding: 12px;
       border: 1px solid #444;
     }
+    th {
+      background-color: #222;
+    }
     .btn {
       background: #1abc9c;
       color: #fff;
@@ -45,29 +54,35 @@
       border: none;
       cursor: pointer;
       border-radius: 6px;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #16a085;
     }
     .modal {
       display: none;
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0,0,0,0.85);
       justify-content: center;
       align-items: center;
-      z-index: 1000;
+      z-index: 999;
     }
     .modal-content {
       background: #222;
-      padding: 20px;
+      padding: 25px;
       border-radius: 10px;
-      max-width: 400px;
       width: 90%;
+      max-width: 400px;
       text-align: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+      animation: slideIn 0.3s ease-in-out;
     }
     .close {
       float: right;
-      color: #f55;
       font-size: 20px;
+      color: #f55;
       cursor: pointer;
     }
     img.qr {
@@ -79,60 +94,23 @@
       padding: 10px;
       border-radius: 6px;
       margin-top: 10px;
+      word-break: break-all;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes slideIn {
+      from {transform: scale(0.9); opacity: 0;}
+      to {transform: scale(1); opacity: 1;}
     }
   </style>
 </head>
 <body>
 
-  <h1>🌐 VPS Plans by Provider</h1>
+  <h1>🌐 VPS Hosting Plans</h1>
 
-  <!-- DigitalOcean -->
-  <div class="provider">
-    <h2><img class="logo" src="https://www.vectorlogo.zone/logos/digitalocean/digitalocean-icon.svg" alt="DigitalOcean">DigitalOcean</h2>
-    <table>
-      <tr><th>Plan</th><th>Price</th><th>Specs</th><th>Buy</th></tr>
-      <tr>
-        <td>DO Basic</td><td>$9.99</td><td>1 Core / 1 GB / 25 GB SSD</td>
-        <td><button class="btn" onclick="openModal('DO Basic', '$9.99')">Buy Now</button></td>
-      </tr>
-    </table>
-  </div>
-
-  <!-- Vultr -->
-  <div class="provider">
-    <h2><img class="logo" src="https://www.vultr.com/media/logo-icon.svg" alt="Vultr">Vultr</h2>
-    <table>
-      <tr><th>Plan</th><th>Price</th><th>Specs</th><th>Buy</th></tr>
-      <tr>
-        <td>Vultr Starter</td><td>$10.99</td><td>1 Core / 1 GB / 25 GB SSD</td>
-        <td><button class="btn" onclick="openModal('Vultr Starter', '$10.99')">Buy Now</button></td>
-      </tr>
-    </table>
-  </div>
-
-  <!-- Linode -->
-  <div class="provider">
-    <h2><img class="logo" src="https://www.vectorlogo.zone/logos/linode/linode-icon.svg" alt="Linode">Linode</h2>
-    <table>
-      <tr><th>Plan</th><th>Price</th><th>Specs</th><th>Buy</th></tr>
-      <tr>
-        <td>Linode Standard</td><td>$11.99</td><td>1 Core / 2 GB / 50 GB SSD</td>
-        <td><button class="btn" onclick="openModal('Linode Standard', '$11.99')">Buy Now</button></td>
-      </tr>
-    </table>
-  </div>
-
-  <!-- Google Cloud -->
-  <div class="provider">
-    <h2><img class="logo" src="https://www.vectorlogo.zone/logos/cloudgoogle/cloudgoogle-icon.svg" alt="Google Cloud">Google Cloud</h2>
-    <table>
-      <tr><th>Plan</th><th>Price</th><th>Specs</th><th>Buy</th></tr>
-      <tr>
-        <td>GCP e2-micro</td><td>$15.99</td><td>2 Core / 1 GB / 30 GB SSD</td>
-        <td><button class="btn" onclick="openModal('GCP e2-micro', '$15.99')">Buy Now</button></td>
-      </tr>
-    </table>
-  </div>
+  <div id="plansContainer"></div>
 
   <!-- Modal -->
   <div id="paymentModal" class="modal">
@@ -141,20 +119,115 @@
       <h3 id="vpsName">VPS Plan</h3>
       <p>💰 <strong id="vpsPrice"></strong></p>
       <div class="wallet-box">
-        <p>📥 Binance Wallet Address:</p>
+        <p>📥 Binance Wallet:</p>
         <code id="walletAddress">0x123456789ABCDEF</code>
         <button onclick="copyWallet()">📋 Copy</button>
         <p>📷 Scan QR:</p>
-        <img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=0x123456789ABCDEF" alt="QR Code">
+        <img class="qr" id="qrImage" src="" alt="QR Code">
       </div>
-      <p>📌 After payment, send proof to Telegram: @yourchannel</p>
+      <p>📌 Send proof to Telegram: <strong>@yourchannel</strong></p>
     </div>
   </div>
 
   <script>
+    const providers = [
+      {
+        name: "DigitalOcean",
+        logo: "https://www.vectorlogo.zone/logos/digitalocean/digitalocean-icon.svg",
+        plans: [
+          { name: "DO Basic", price: "$9.99", specs: "1 Core / 1 GB / 25 GB SSD" }
+        ]
+      },
+      {
+        name: "Vultr",
+        logo: "https://www.vultr.com/media/logo-icon.svg",
+        plans: [
+          { name: "Vultr Starter", price: "$10.99", specs: "1 Core / 1 GB / 25 GB SSD" }
+        ]
+      },
+      {
+        name: "Linode",
+        logo: "https://www.vectorlogo.zone/logos/linode/linode-icon.svg",
+        plans: [
+          { name: "Linode Standard", price: "$11.99", specs: "1 Core / 2 GB / 50 GB SSD" }
+        ]
+      },
+      {
+        name: "Google Cloud",
+        logo: "https://www.vectorlogo.zone/logos/cloudgoogle/cloudgoogle-icon.svg",
+        plans: [
+          { name: "GCP e2-micro", price: "$15.99", specs: "2 Core / 1 GB / 30 GB SSD" }
+        ]
+      },
+      {
+        name: "AWS",
+        logo: "https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg",
+        plans: [
+          { name: "AWS t2.micro", price: "$14.99", specs: "1 Core / 1 GB / 30 GB SSD" }
+        ]
+      },
+      {
+        name: "Azure",
+        logo: "https://www.vectorlogo.zone/logos/microsoft_azure/microsoft_azure-icon.svg",
+        plans: [
+          { name: "Azure A1", price: "$13.99", specs: "1 Core / 1.75 GB / 40 GB SSD" }
+        ]
+      },
+      {
+        name: "Alibaba Cloud",
+        logo: "https://www.vectorlogo.zone/logos/alibaba/alibaba-icon.svg",
+        plans: [
+          { name: "Alibaba Basic", price: "$12.99", specs: "1 Core / 2 GB / 40 GB SSD" }
+        ]
+      },
+      {
+        name: "Hetzner",
+        logo: "https://www.hetzner.com/assets/images/hetzner-logo.svg",
+        plans: [
+          { name: "CX11", price: "$4.50", specs: "1 Core / 2 GB / 20 GB SSD" }
+        ]
+      },
+      {
+        name: "Contabo",
+        logo: "https://www.contabo.com/img/logos/contabo/contabo-logo.svg",
+        plans: [
+          { name: "Contabo VPS S", price: "$6.99", specs: "4 Core / 8 GB / 50 GB SSD" }
+        ]
+      },
+      {
+        name: "OVH",
+        logo: "https://www.ovhcloud.com/sites/default/files/styles/large/public/2021-09/logo-ovhcloud.svg",
+        plans: [
+          { name: "OVH Starter", price: "$5.99", specs: "1 Core / 2 GB / 40 GB SSD" }
+        ]
+      }
+    ];
+
+    const container = document.getElementById('plansContainer');
+
+    providers.forEach(provider => {
+      const section = document.createElement('div');
+      section.className = 'provider';
+      section.innerHTML = `
+        <h2><img class="logo" src="${provider.logo}" alt="${provider.name}">${provider.name}</h2>
+        <table>
+          <tr><th>Plan</th><th>Price</th><th>Specs</th><th>Buy</th></tr>
+          ${provider.plans.map(plan => `
+            <tr>
+              <td>${plan.name}</td>
+              <td>${plan.price}</td>
+              <td>${plan.specs}</td>
+              <td><button class="btn" onclick="openModal('${plan.name}', '${plan.price}')">Buy</button></td>
+            </tr>`).join('')}
+        </table>
+      `;
+      container.appendChild(section);
+    });
+
     function openModal(name, price) {
       document.getElementById("vpsName").innerText = name;
       document.getElementById("vpsPrice").innerText = price;
+      document.getElementById("qrImage").src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=0x123456789ABCDEF`;
       document.getElementById("paymentModal").style.display = "flex";
     }
 
@@ -164,14 +237,11 @@
 
     function copyWallet() {
       const wallet = document.getElementById("walletAddress").innerText;
-      navigator.clipboard.writeText(wallet).then(() => {
-        alert("Copied wallet address!");
-      });
+      navigator.clipboard.writeText(wallet).then(() => alert("Copied wallet address!"));
     }
 
     window.onclick = function(e) {
-      const modal = document.getElementById("paymentModal");
-      if (e.target == modal) {
+      if (e.target === document.getElementById("paymentModal")) {
         closeModal();
       }
     }
