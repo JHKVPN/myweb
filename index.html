@@ -6,11 +6,11 @@
   <title>VPS Plans</title>
   <style>
     body {
-      margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: #0d0d0d;
+      background: #0f0f0f;
       color: #eee;
       padding: 20px;
+      margin: 0;
     }
     h1 {
       text-align: center;
@@ -23,7 +23,7 @@
       padding: 20px;
       margin-bottom: 25px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-      animation: fadeIn 0.7s ease-in-out;
+      animation: fadeIn 0.5s ease-in-out;
     }
     .provider h2 {
       margin: 0 0 10px;
@@ -77,17 +77,12 @@
       max-width: 400px;
       text-align: center;
       box-shadow: 0 8px 30px rgba(0,0,0,0.7);
-      animation: slideIn 0.3s ease-in-out;
     }
     .close {
       float: right;
       font-size: 20px;
       color: #f55;
       cursor: pointer;
-    }
-    img.qr {
-      width: 120px;
-      margin-top: 10px;
     }
     .wallet-box {
       background: #333;
@@ -96,19 +91,30 @@
       margin-top: 10px;
       word-break: break-all;
     }
+    .telegram {
+      margin-top: 20px;
+    }
+    .telegram a {
+      color: #1abc9c;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .telegram img {
+      width: 20px;
+      height: 20px;
+    }
     @keyframes fadeIn {
       from {opacity: 0; transform: translateY(10px);}
       to {opacity: 1; transform: translateY(0);}
-    }
-    @keyframes slideIn {
-      from {transform: scale(0.9); opacity: 0;}
-      to {transform: scale(1); opacity: 1;}
     }
   </style>
 </head>
 <body>
 
-  <h1>🌐 VPS ACCOUNT FOR SALES</h1>
+  <h1>🌐 VPS Hosting Plans</h1>
 
   <div id="plansContainer"></div>
 
@@ -122,10 +128,14 @@
         <p>📥 Binance Wallet:</p>
         <code id="Binace ID">219766442</code>
         <button onclick="copyWallet()">📋 Copy</button>
-        <p>📷 Scan QR:</p>
-        <img class="qr" id="qrImage" src="" alt="QR Code">
       </div>
-      <p>📌 Send proof to Telegram: <strong>@Pussy1990</strong></p>
+      <div class="telegram">
+        <p>📌 Send payment proof via Telegram:</p>
+        <a href="https://t.me/jaideevpn" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram Icon">
+          @Pussy1990
+        </a>
+      </div>
     </div>
   </div>
 
@@ -133,72 +143,37 @@
     const providers = [
       {
         name: "DigitalOcean",
-        logo: "https://www.vectorlogo.zone/logos/digitalocean/digitalocean-icon.svg",
+        logo: "https://cdn.worldvectorlogo.com/logos/digitalocean-1.svg",
         plans: [
           { name: "DO Basic", price: "$9.99", specs: "1 Core / 1 GB / 25 GB SSD" }
         ]
       },
       {
         name: "Vultr",
-        logo: "https://www.vultr.com/media/logo-icon.svg",
+        logo: "https://assets.vultr.com/media/logo-icon.svg",
         plans: [
           { name: "Vultr Starter", price: "$10.99", specs: "1 Core / 1 GB / 25 GB SSD" }
         ]
       },
       {
         name: "Linode",
-        logo: "https://www.vectorlogo.zone/logos/linode/linode-icon.svg",
+        logo: "https://www.linode.com/media/images/logos/linode-logo_vertical.png",
         plans: [
           { name: "Linode Standard", price: "$11.99", specs: "1 Core / 2 GB / 50 GB SSD" }
         ]
       },
       {
         name: "Google Cloud",
-        logo: "https://www.vectorlogo.zone/logos/cloudgoogle/cloudgoogle-icon.svg",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/5/5f/Google_Cloud_logo.png",
         plans: [
           { name: "GCP e2-micro", price: "$15.99", specs: "2 Core / 1 GB / 30 GB SSD" }
         ]
       },
       {
         name: "AWS",
-        logo: "https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg",
         plans: [
           { name: "AWS t2.micro", price: "$14.99", specs: "1 Core / 1 GB / 30 GB SSD" }
-        ]
-      },
-      {
-        name: "Azure",
-        logo: "https://www.vectorlogo.zone/logos/microsoft_azure/microsoft_azure-icon.svg",
-        plans: [
-          { name: "Azure A1", price: "$13.99", specs: "1 Core / 1.75 GB / 40 GB SSD" }
-        ]
-      },
-      {
-        name: "Alibaba Cloud",
-        logo: "https://www.vectorlogo.zone/logos/alibaba/alibaba-icon.svg",
-        plans: [
-          { name: "Alibaba Basic", price: "$12.99", specs: "1 Core / 2 GB / 40 GB SSD" }
-        ]
-      },
-      {
-        name: "Hetzner",
-        logo: "https://www.hetzner.com/assets/images/hetzner-logo.svg",
-        plans: [
-          { name: "CX11", price: "$4.50", specs: "1 Core / 2 GB / 20 GB SSD" }
-        ]
-      },
-      {
-        name: "Contabo",
-        logo: "https://www.contabo.com/img/logos/contabo/contabo-logo.svg",
-        plans: [
-          { name: "Contabo VPS S", price: "$6.99", specs: "4 Core / 8 GB / 50 GB SSD" }
-        ]
-      },
-      {
-        name: "OVH",
-        logo: "https://www.ovhcloud.com/sites/default/files/styles/large/public/2021-09/logo-ovhcloud.svg",
-        plans: [
-          { name: "OVH Starter", price: "$5.99", specs: "1 Core / 2 GB / 40 GB SSD" }
         ]
       }
     ];
@@ -227,7 +202,6 @@
     function openModal(name, price) {
       document.getElementById("vpsName").innerText = name;
       document.getElementById("vpsPrice").innerText = price;
-      document.getElementById("qrImage").src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=0x123456789ABCDEF`;
       document.getElementById("paymentModal").style.display = "flex";
     }
 
