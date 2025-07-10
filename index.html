@@ -6,42 +6,55 @@
   <title>VPS Plans</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f0f0f;
+      color: #eee;
       padding: 20px;
+      margin: 0;
     }
-    h2 {
-      margin-top: 40px;
+    h1 {
+      text-align: center;
       color: #1abc9c;
+      margin-bottom: 30px;
+    }
+    .provider {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+    .provider img.logo {
+      height: 28px;
+      vertical-align: middle;
+      margin-right: 10px;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 20px;
+      margin-top: 15px;
     }
     th, td {
-      padding: 10px;
-      text-align: left;
-      border: 1px solid #555;
+      padding: 12px;
+      border: 1px solid #444;
     }
     .btn {
       background: #1abc9c;
       color: #fff;
-      padding: 8px 12px;
+      padding: 8px 14px;
       border: none;
       cursor: pointer;
-      border-radius: 5px;
+      border-radius: 6px;
     }
     .modal {
       display: none;
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0, 0, 0, 0.8);
       justify-content: center;
       align-items: center;
-      z-index: 999;
+      z-index: 1000;
     }
     .modal-content {
       background: #222;
@@ -49,20 +62,22 @@
       border-radius: 10px;
       max-width: 400px;
       width: 90%;
+      text-align: center;
     }
     .close {
       float: right;
-      color: red;
+      color: #f55;
+      font-size: 20px;
       cursor: pointer;
     }
     img.qr {
-      width: 100px;
+      width: 120px;
       margin-top: 10px;
     }
     .wallet-box {
       background: #333;
       padding: 10px;
-      border-radius: 5px;
+      border-radius: 6px;
       margin-top: 10px;
     }
   </style>
@@ -72,82 +87,52 @@
   <h1>🌐 VPS Plans by Provider</h1>
 
   <!-- DigitalOcean -->
-  <h2>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/DigitalOcean_logo.svg" alt="DigitalOcean" style="height: 24px; vertical-align: middle; margin-right: 8px;">
-    DigitalOcean
-  </h2>
-  <table>
-    <tr><th>Plan</th><th>Price</th><th>Specs</th><th>Buy</th></tr>
-    <tr>
-      <td>DO Basic</td><td>$9.99</td><td>1 Core / 1 GB / 25 GB SSD</td>
-      <td><button class="btn" onclick="openModal('DO Basic', '$9.99')">Buy Now</button></td>
-    </tr>
-  </table>
+  <div class="provider">
+    <h2><img class="logo" src="https://www.vectorlogo.zone/logos/digitalocean/digitalocean-icon.svg" alt="DigitalOcean">DigitalOcean</h2>
+    <table>
+      <tr><th>Plan</th><th>Price</th><th>Specs</th><th>Buy</th></tr>
+      <tr>
+        <td>DO Basic</td><td>$9.99</td><td>1 Core / 1 GB / 25 GB SSD</td>
+        <td><button class="btn" onclick="openModal('DO Basic', '$9.99')">Buy Now</button></td>
+      </tr>
+    </table>
+  </div>
 
   <!-- Vultr -->
-  <h2>
-    <img src="https://www.svgrepo.com/show/354192/vultr.svg" alt="Vultr" style="height: 24px; vertical-align: middle; margin-right: 8px;">
-    Vultr
-  </h2>
-  <table>
-    <tr><th>Plan</th><th>Price</th><th>Specs</th><th>Buy</th></tr>
-    <tr>
-      <td>Vultr Starter</td><td>$10.99</td><td>1 Core / 1 GB / 25 GB SSD</td>
-      <td><button class="btn" onclick="openModal('Vultr Starter', '$10.99')">Buy Now</button></td>
-    </tr>
-  </table>
+  <div class="provider">
+    <h2><img class="logo" src="https://www.vultr.com/media/logo-icon.svg" alt="Vultr">Vultr</h2>
+    <table>
+      <tr><th>Plan</th><th>Price</th><th>Specs</th><th>Buy</th></tr>
+      <tr>
+        <td>Vultr Starter</td><td>$10.99</td><td>1 Core / 1 GB / 25 GB SSD</td>
+        <td><button class="btn" onclick="openModal('Vultr Starter', '$10.99')">Buy Now</button></td>
+      </tr>
+    </table>
+  </div>
 
   <!-- Linode -->
-  <h2>
-    <img src="https://www.linode.com/media/images/logos/logo-standard.svg" alt="Linode" style="height: 24px; vertical-align: middle; margin-right: 8px;">
-    Linode
-  </h2>
-  <table>
-    <tr><th>Plan</th><th>Price</th><th>Specs</th><th>Buy</th></tr>
-    <tr>
-      <td>Linode Standard</td><td>$11.99</td><td>1 Core / 2 GB / 50 GB SSD</td>
-      <td><button class="btn" onclick="openModal('Linode Standard', '$11.99')">Buy Now</button></td>
-    </tr>
-  </table>
-
-  <!-- Azure -->
-  <h2>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg" alt="Azure" style="height: 24px; vertical-align: middle; margin-right: 8px;">
-    Azure
-  </h2>
-  <table>
-    <tr><th>Plan</th><th>Price</th><th>Specs</th><th>Buy</th></tr>
-    <tr>
-      <td>Azure VPS A1</td><td>$13.99</td><td>1 Core / 1.75 GB / 40 GB SSD</td>
-      <td><button class="btn" onclick="openModal('Azure VPS A1', '$13.99')">Buy Now</button></td>
-    </tr>
-  </table>
-
-  <!-- AWS -->
-  <h2>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" style="height: 24px; vertical-align: middle; margin-right: 8px;">
-    AWS
-  </h2>
-  <table>
-    <tr><th>Plan</th><th>Price</th><th>Specs</th><th>Buy</th></tr>
-    <tr>
-      <td>AWS t2.micro</td><td>$14.99</td><td>1 Core / 1 GB / 30 GB SSD</td>
-      <td><button class="btn" onclick="openModal('AWS t2.micro', '$14.99')">Buy Now</button></td>
-    </tr>
-  </table>
+  <div class="provider">
+    <h2><img class="logo" src="https://www.vectorlogo.zone/logos/linode/linode-icon.svg" alt="Linode">Linode</h2>
+    <table>
+      <tr><th>Plan</th><th>Price</th><th>Specs</th><th>Buy</th></tr>
+      <tr>
+        <td>Linode Standard</td><td>$11.99</td><td>1 Core / 2 GB / 50 GB SSD</td>
+        <td><button class="btn" onclick="openModal('Linode Standard', '$11.99')">Buy Now</button></td>
+      </tr>
+    </table>
+  </div>
 
   <!-- Google Cloud -->
-  <h2>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Google_Cloud_logo.svg" alt="Google Cloud" style="height: 24px; vertical-align: middle; margin-right: 8px;">
-    Google Cloud
-  </h2>
-  <table>
-    <tr><th>Plan</th><th>Price</th><th>Specs</th><th>Buy</th></tr>
-    <tr>
-      <td>GCP e2-micro</td><td>$15.99</td><td>2 Core / 1 GB / 30 GB SSD</td>
-      <td><button class="btn" onclick="openModal('GCP e2-micro', '$15.99')">Buy Now</button></td>
-    </tr>
-  </table>
+  <div class="provider">
+    <h2><img class="logo" src="https://www.vectorlogo.zone/logos/cloudgoogle/cloudgoogle-icon.svg" alt="Google Cloud">Google Cloud</h2>
+    <table>
+      <tr><th>Plan</th><th>Price</th><th>Specs</th><th>Buy</th></tr>
+      <tr>
+        <td>GCP e2-micro</td><td>$15.99</td><td>2 Core / 1 GB / 30 GB SSD</td>
+        <td><button class="btn" onclick="openModal('GCP e2-micro', '$15.99')">Buy Now</button></td>
+      </tr>
+    </table>
+  </div>
 
   <!-- Modal -->
   <div id="paymentModal" class="modal">
