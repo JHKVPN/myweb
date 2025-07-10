@@ -11,6 +11,10 @@
       color: #fff;
       padding: 20px;
     }
+    h2 {
+      margin-top: 40px;
+      color: #1abc9c;
+    }
     table {
       width: 100%;
       border-collapse: collapse;
@@ -37,6 +41,7 @@
       background: rgba(0,0,0,0.8);
       justify-content: center;
       align-items: center;
+      z-index: 999;
     }
     .modal-content {
       background: #222;
@@ -64,25 +69,65 @@
 </head>
 <body>
 
-  <h2>💻 VPS Plans</h2>
+  <h1>🌐 VPS Plans by Provider</h1>
+
+  <!-- DigitalOcean -->
+  <h2>🚀 DigitalOcean</h2>
   <table>
+    <tr><th>Plan</th><th>Price</th><th>Specs</th><th>Buy</th></tr>
     <tr>
-      <th>VPS Name</th>
-      <th>Price</th>
-      <th>Specs</th>
-      <th>Buy</th>
+      <td>DO Basic</td><td>$9.99</td><td>1 Core / 1 GB / 25 GB SSD</td>
+      <td><button class="btn" onclick="openModal('DO Basic', '$9.99')">Buy Now</button></td>
     </tr>
+  </table>
+
+  <!-- Vultr -->
+  <h2>🔥 Vultr</h2>
+  <table>
+    <tr><th>Plan</th><th>Price</th><th>Specs</th><th>Buy</th></tr>
     <tr>
-      <td>Basic VPS</td>
-      <td>$9.99</td>
-      <td>1 Core / 1 GB / 30 GB SSD</td>
-      <td><button class="btn" onclick="openModal('Basic VPS', '$9.99')">Buy Now</button></td>
+      <td>Vultr Starter</td><td>$10.99</td><td>1 Core / 1 GB / 25 GB SSD</td>
+      <td><button class="btn" onclick="openModal('Vultr Starter', '$10.99')">Buy Now</button></td>
     </tr>
+  </table>
+
+  <!-- Linode -->
+  <h2>📦 Linode</h2>
+  <table>
+    <tr><th>Plan</th><th>Price</th><th>Specs</th><th>Buy</th></tr>
     <tr>
-      <td>Premium VPS</td>
-      <td>$36.99</td>
-      <td>2 Core / 2 GB / 40 GB SSD</td>
-      <td><button class="btn" onclick="openModal('Premium VPS', '$36.99')">Buy Now</button></td>
+      <td>Linode Standard</td><td>$11.99</td><td>1 Core / 2 GB / 50 GB SSD</td>
+      <td><button class="btn" onclick="openModal('Linode Standard', '$11.99')">Buy Now</button></td>
+    </tr>
+  </table>
+
+  <!-- Azure -->
+  <h2>☁️ Azure</h2>
+  <table>
+    <tr><th>Plan</th><th>Price</th><th>Specs</th><th>Buy</th></tr>
+    <tr>
+      <td>Azure VPS A1</td><td>$13.99</td><td>1 Core / 1.75 GB / 40 GB SSD</td>
+      <td><button class="btn" onclick="openModal('Azure VPS A1', '$13.99')">Buy Now</button></td>
+    </tr>
+  </table>
+
+  <!-- AWS -->
+  <h2>🛡 AWS</h2>
+  <table>
+    <tr><th>Plan</th><th>Price</th><th>Specs</th><th>Buy</th></tr>
+    <tr>
+      <td>AWS t2.micro</td><td>$14.99</td><td>1 Core / 1 GB / 30 GB SSD</td>
+      <td><button class="btn" onclick="openModal('AWS t2.micro', '$14.99')">Buy Now</button></td>
+    </tr>
+  </table>
+
+  <!-- Google Cloud -->
+  <h2>🌍 Google Cloud</h2>
+  <table>
+    <tr><th>Plan</th><th>Price</th><th>Specs</th><th>Buy</th></tr>
+    <tr>
+      <td>GCP e2-micro</td><td>$15.99</td><td>2 Core / 1 GB / 30 GB SSD</td>
+      <td><button class="btn" onclick="openModal('GCP e2-micro', '$15.99')">Buy Now</button></td>
     </tr>
   </table>
 
@@ -121,7 +166,6 @@
       });
     }
 
-    // Close modal when clicked outside
     window.onclick = function(e) {
       const modal = document.getElementById("paymentModal");
       if (e.target == modal) {
