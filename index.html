@@ -77,6 +77,47 @@
       background: #45a049;
     }
 
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: auto;
+      padding: 2rem;
+      border: 1px solid #888;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 10px;
+      text-align: left;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: black;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
     form {
       background: white;
       padding: 2rem;
@@ -121,40 +162,49 @@
     <a href="#">Home</a>
     <a href="#services">Services</a>
     <a href="#contact">Contact</a>
-    <a href="#">မြန်မာ</a>
   </nav>
-
-  <section>
-    <h2>Available VPS Services</h2>
-    <p>Choose from the best VPS hosting providers at affordable prices.</p>
-  </section>
 
   <section id="services">
     <h2>Our VPS Offers</h2>
     <div class="services">
+
+      <!-- Service 1 -->
       <div class="service-card">
         <h3>DigitalOcean VPS</h3>
-        <p>Starting at $3/month. 1 vCPU, 1GB RAM, 25GB SSD.</p>
-        <button class="buy-btn">Buy Now</button>
+        <p>From $3/month</p>
+        <button class="buy-btn" onclick="showDetails(1)">Buy Now</button>
       </div>
+
+      <!-- Service 2 -->
       <div class="service-card">
         <h3>Vultr VPS</h3>
-        <p>SSD Cloud Instances. Instant delivery. From $4.50/month.</p>
-        <button class="buy-btn">Buy Now</button>
+        <p>From $4.50/month</p>
+        <button class="buy-btn" onclick="showDetails(2)">Buy Now</button>
       </div>
+
+      <!-- Service 3 -->
       <div class="service-card">
         <h3>Google Cloud VPS</h3>
-        <p>GCP VPS accounts with $300 free credit. Verified setup.</p>
-        <button class="buy-btn">Buy Now</button>
+        <p>GCP $300 credit</p>
+        <button class="buy-btn" onclick="showDetails(3)">Buy Now</button>
       </div>
-      <div class="service-card">
-        <h3>Custom Setup</h3>
-        <p>Need custom configurations or bulk orders? Let’s talk.</p>
-        <button class="buy-btn">Buy Now</button>
-      </div>
+
     </div>
   </section>
 
+  <!-- Modal -->
+  <div id="vpsModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="vpsTitle">VPS Details</h2>
+      <ul id="vpsSpecs">
+        <!-- specs will be loaded dynamically -->
+      </ul>
+      <button class="buy-btn" onclick="alert('Order Confirmed!')">Order Now</button>
+    </div>
+  </div>
+
+  <!-- Contact -->
   <section id="contact">
     <h2>Contact Us</h2>
     <form>
@@ -169,17 +219,66 @@
     <p>&copy; 2025 VPS For Sale. All rights reserved.</p>
   </footer>
 
-  <!-- Messenger Chat Plugin -->
+  <!-- Facebook Messenger -->
   <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous" 
-    src="https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js"></script>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js"></script>
   <div class="fb-customerchat"
     attribution="setup_tool"
     page_id="YOUR_PAGE_ID"
     theme_color="#4CAF50"
-    logged_in_greeting="Hello! How can we help you?"
-    logged_out_greeting="Hello! How can we help you?">
+    logged_in_greeting="Hi! How can we help you?"
+    logged_out_greeting="Hi! How can we help you?">
   </div>
+
+  <!-- Modal JS -->
+  <script>
+    const specs = {
+      1: {
+        title: "DigitalOcean VPS",
+        features: [
+          "✅ CPU: 1 Core",
+          "✅ RAM: 1 GB",
+          "✅ SSD: 30 GB",
+          "✅ Bandwidth: Unlimited"
+        ]
+      },
+      2: {
+        title: "Vultr VPS",
+        features: [
+          "✅ CPU: 2 Cores",
+          "✅ RAM: 2 GB",
+          "✅ SSD: 40 GB",
+          "✅ Bandwidth: Unlimited"
+        ]
+      },
+      3: {
+        title: "Google Cloud VPS",
+        features: [
+          "✅ CPU: 2 vCPU",
+          "✅ RAM: 4 GB",
+          "✅ SSD: 50 GB",
+          "✅ $300 Free Credit"
+        ]
+      }
+    };
+
+    function showDetails(id) {
+      document.getElementById("vpsTitle").innerText = specs[id].title;
+      document.getElementById("vpsSpecs").innerHTML = specs[id].features.map(f => `<li>${f}</li>`).join('');
+      document.getElementById("vpsModal").style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("vpsModal").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("vpsModal");
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
 
 </body>
 </html>
