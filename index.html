@@ -39,24 +39,24 @@
     }
     h1 {
       font-size: 2.5rem;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
-    .marquee {
-      width: 100%;
-      overflow: hidden;
-      white-space: nowrap;
-      background: #00ff00;
-      color: #000;
-      padding: 10px 0;
+    .marquee-led {
       font-weight: bold;
       font-size: 1rem;
-      border-radius: 8px;
-      margin: 10px 0 30px;
-      animation: marquee 15s linear infinite;
-      text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+      color: #00ff00;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: marquee-led 15s linear infinite;
+      text-shadow:
+        0 0 5px #00ff00,
+        0 0 10px #00ff00,
+        0 0 20px #00ff00,
+        0 0 30px #00ff00;
+      margin: 10px 0 20px;
     }
-    @keyframes marquee {
-      0%   { transform: translateX(100%); }
+    @keyframes marquee-led {
+      0% { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
     }
     .toggle-theme {
@@ -175,20 +175,68 @@
 
   <header>
     <h1>🔥 Choose Your VPS Plan</h1>
+    <div class="marquee-led">
+      🚀 Fast & Secure Thailand VPS | Gamer & Business Ready | 24/7 Support | Pay with Binance or TrueMoney!
+    </div>
   </header>
 
-  <div class="marquee">
-    🚀 Fast & Secure Thailand VPS for Gamers, Developers, and Businesses | 24/7 Uptime | Order Now via Telegram!
-  </div>
-
   <section class="plans">
-    <div class="card"><h2>Basic</h2><p>1 CPU • 1 GB RAM</p><p>25 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿180</p><button class="buy-btn" onclick="orderPlan('Basic')">Buy Now</button></div>
-    <div class="card"><h2>Standard</h2><p>2 CPU • 2 GB RAM</p><p>50 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿290</p><button class="buy-btn" onclick="orderPlan('Standard')">Buy Now</button></div>
-    <div class="card"><h2>Pro</h2><p>4 CPU • 4 GB RAM</p><p>80 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿440</p><button class="buy-btn" onclick="orderPlan('Pro')">Buy Now</button></div>
-    <div class="card"><h2>Business</h2><p>6 CPU • 8 GB RAM</p><p>160 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿790</p><button class="buy-btn" onclick="orderPlan('Business')">Buy Now</button></div>
-    <div class="card"><h2>Ultra</h2><p>8 CPU • 12 GB RAM</p><p>240 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿1150</p><button class="buy-btn" onclick="orderPlan('Ultra')">Buy Now</button></div>
-    <div class="card"><h2>Extreme</h2><p>12 CPU • 16 GB RAM</p><p>320 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿1490</p><button class="buy-btn" onclick="orderPlan('Extreme')">Buy Now</button></div>
-    <div class="card"><h2>Game Plan</h2><p>6 CPU • 12 GB RAM</p><p>100 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿690</p><button class="buy-btn" onclick="orderPlan('Game Plan')">Buy Now</button></div>
+    <div class="card">
+      <h2>Basic</h2>
+      <p>1 CPU • 1 GB RAM</p>
+      <p>25 GB SSD • Unlimited Bandwidth</p>
+      <p>📍 🇹🇭 Thailand</p>
+      <p class="price">฿180</p>
+      <button class="buy-btn" onclick="orderPlan('Basic')">Buy Now</button>
+    </div>
+    <div class="card">
+      <h2>Standard</h2>
+      <p>2 CPU • 2 GB RAM</p>
+      <p>50 GB SSD • Unlimited Bandwidth</p>
+      <p>📍 🇹🇭 Thailand</p>
+      <p class="price">฿290</p>
+      <button class="buy-btn" onclick="orderPlan('Standard')">Buy Now</button>
+    </div>
+    <div class="card">
+      <h2>Pro</h2>
+      <p>4 CPU • 4 GB RAM</p>
+      <p>80 GB SSD • Unlimited Bandwidth</p>
+      <p>📍 🇹🇭 Thailand</p>
+      <p class="price">฿440</p>
+      <button class="buy-btn" onclick="orderPlan('Pro')">Buy Now</button>
+    </div>
+    <div class="card">
+      <h2>Business</h2>
+      <p>6 CPU • 8 GB RAM</p>
+      <p>160 GB SSD • Unlimited Bandwidth</p>
+      <p>📍 🇹🇭 Thailand</p>
+      <p class="price">฿790</p>
+      <button class="buy-btn" onclick="orderPlan('Business')">Buy Now</button>
+    </div>
+    <div class="card">
+      <h2>Ultra</h2>
+      <p>8 CPU • 12 GB RAM</p>
+      <p>240 GB SSD • Unlimited Bandwidth</p>
+      <p>📍 🇹🇭 Thailand</p>
+      <p class="price">฿1150</p>
+      <button class="buy-btn" onclick="orderPlan('Ultra')">Buy Now</button>
+    </div>
+    <div class="card">
+      <h2>Extreme</h2>
+      <p>12 CPU • 16 GB RAM</p>
+      <p>320 GB SSD • Unlimited Bandwidth</p>
+      <p>📍 🇹🇭 Thailand</p>
+      <p class="price">฿1490</p>
+      <button class="buy-btn" onclick="orderPlan('Extreme')">Buy Now</button>
+    </div>
+    <div class="card">
+      <h2>Game Plan</h2>
+      <p>6 CPU • 12 GB RAM</p>
+      <p>100 GB SSD • Unlimited Bandwidth</p>
+      <p>📍 🇹🇭 Thailand</p>
+      <p class="price">฿690</p>
+      <button class="buy-btn" onclick="orderPlan('Game Plan')">Buy Now</button>
+    </div>
   </section>
 
   <div class="telegram">
@@ -201,6 +249,11 @@
     <p>Number: <strong>098-xxx-xxxx</strong></p>
     <p>OR scan QR below:</p>
     <img src="https://yourdomain.com/truemoney-qr.png" alt="TrueMoney QR">
+    <br><br>
+    <h3>🪙 Binance (BSC)</h3>
+    <p>Wallet Address: <strong>bnb123abc456xyz...</strong></p>
+    <p>Or Scan QR:</p>
+    <img src="https://yourdomain.com/binance-qr.png" alt="Binance QR">
   </div>
 
   <script>
@@ -218,6 +271,5 @@
       window.open(`${telegram}?text=${message}`, "_blank");
     }
   </script>
-
 </body>
 </html>
