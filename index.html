@@ -116,7 +116,7 @@
       max-width: 500px;
     }
     .payment img {
-      width: 160px;
+      width: 180px;
       margin-top: 10px;
     }
     table {
@@ -145,57 +145,65 @@
   <button class="toggle-theme" onclick="toggleTheme()">🌓 Mode</button>
 
   <header>
-    <h1>🔥 Choose Your VPS Plan</h1>
+    <h1>🔥 เลือกแพ็คเกจ VPS ของคุณ</h1>
   </header>
 
   <section class="plans">
-    <!-- Existing VPS Plans (6 Plans like Basic, Standard...) -->
-    <!-- ... (keep original 6 plans here) ... -->
-
-    <!-- ✅ Thai VPS Plans (Unlimited Bandwidth) -->
     <div class="card">
-      <h2>Thai Starter</h2>
+      <h2>Basic</h2>
       <p>1 CPU • 1 GB RAM</p>
-      <p>30 GB SSD • Unlimited Bandwidth</p>
+      <p>25 GB SSD • 1 TB Bandwidth</p>
       <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿220</p>
-      <button class="buy-btn" onclick="orderPlan('Thai Starter')">Buy Now</button>
+      <p class="price">฿180</p>
+      <button class="buy-btn" onclick="orderPlan('Basic')">Buy Now</button>
     </div>
-
     <div class="card">
-      <h2>Thai Basic</h2>
+      <h2>Standard</h2>
       <p>2 CPU • 2 GB RAM</p>
-      <p>40 GB SSD • Unlimited Bandwidth</p>
+      <p>50 GB SSD • 2 TB Bandwidth</p>
       <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿320</p>
-      <button class="buy-btn" onclick="orderPlan('Thai Basic')">Buy Now</button>
+      <p class="price">฿290</p>
+      <button class="buy-btn" onclick="orderPlan('Standard')">Buy Now</button>
     </div>
-
     <div class="card">
-      <h2>Thai Standard</h2>
-      <p>3 CPU • 4 GB RAM</p>
-      <p>60 GB SSD • Unlimited Bandwidth</p>
+      <h2>Pro</h2>
+      <p>4 CPU • 4 GB RAM</p>
+      <p>80 GB SSD • 4 TB Bandwidth</p>
       <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿480</p>
-      <button class="buy-btn" onclick="orderPlan('Thai Standard')">Buy Now</button>
+      <p class="price">฿440</p>
+      <button class="buy-btn" onclick="orderPlan('Pro')">Buy Now</button>
     </div>
-
     <div class="card">
-      <h2>Thai Pro</h2>
-      <p>4 CPU • 8 GB RAM</p>
-      <p>80 GB SSD • Unlimited Bandwidth</p>
+      <h2>Business</h2>
+      <p>6 CPU • 8 GB RAM</p>
+      <p>160 GB SSD • 6 TB Bandwidth</p>
       <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿720</p>
-      <button class="buy-btn" onclick="orderPlan('Thai Pro')">Buy Now</button>
+      <p class="price">฿790</p>
+      <button class="buy-btn" onclick="orderPlan('Business')">Buy Now</button>
     </div>
-
     <div class="card">
-      <h2>Thai Ultra</h2>
-      <p>6 CPU • 16 GB RAM</p>
-      <p>120 GB SSD • Unlimited Bandwidth</p>
+      <h2>Ultra</h2>
+      <p>8 CPU • 12 GB RAM</p>
+      <p>240 GB SSD • 8 TB Bandwidth</p>
       <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿1100</p>
-      <button class="buy-btn" onclick="orderPlan('Thai Ultra')">Buy Now</button>
+      <p class="price">฿1150</p>
+      <button class="buy-btn" onclick="orderPlan('Ultra')">Buy Now</button>
+    </div>
+    <div class="card">
+      <h2>Extreme</h2>
+      <p>12 CPU • 16 GB RAM</p>
+      <p>320 GB SSD • 10 TB Bandwidth</p>
+      <p>📍 🇹🇭 Thailand</p>
+      <p class="price">฿1490</p>
+      <button class="buy-btn" onclick="orderPlan('Extreme')">Buy Now</button>
+    </div>
+    <div class="card">
+      <h2>Platinum</h2>
+      <p>6 CPU • 12 GB RAM</p>
+      <p>300 GB SSD • <strong>Unlimited</strong> Bandwidth</p>
+      <p>📍 🇹🇭 Thailand</p>
+      <p class="price">฿990</p>
+      <button class="buy-btn" onclick="orderPlan('Platinum')">Buy Now</button>
     </div>
   </section>
 
@@ -205,29 +213,30 @@
   </div>
 
   <div class="payment">
-    <h3>💳 Binance Payment (USDT - TRC20)</h3>
-    <p>Wallet Address:</p>
-    <p><strong id="wallet">TXZ1EXAMPLEYOURWALLETADDRESS</strong> 
+    <h3>💳 ชำระเงินผ่าน PromptPay</h3>
+    <p>หมายเลขพร้อมเพย์ (PromptPay ID):</p>
+    <p><strong id="wallet">0812345678</strong> 
       <button onclick="copyWallet()">📋 Copy</button>
     </p>
-    <img src="https://yourdomain.com/images/binance-qr.png" alt="Binance QR">
-    <p>Send payment and confirm via Telegram</p>
+    <img src="https://yourdomain.com/images/promptpay-qr.png" alt="PromptPay QR">
+    <p>หลังจากชำระเงิน กรุณายืนยันกับทีมงานผ่าน Telegram</p>
   </div>
 
   <section>
-    <h2>📊 Compare All Plans</h2>
+    <h2>📊 เปรียบเทียบแพ็คเกจ</h2>
     <div style="overflow-x:auto;">
       <table>
         <thead>
           <tr><th>Plan</th><th>CPU</th><th>RAM</th><th>SSD</th><th>Bandwidth</th><th>Location</th><th>Price</th></tr>
         </thead>
         <tbody>
-          <!-- Add comparison rows including Thai plans -->
-          <tr><td>Thai Starter</td><td>1</td><td>1 GB</td><td>30 GB</td><td>Unlimited</td><td>🇹🇭 Thailand</td><td>฿220</td></tr>
-          <tr><td>Thai Basic</td><td>2</td><td>2 GB</td><td>40 GB</td><td>Unlimited</td><td>🇹🇭 Thailand</td><td>฿320</td></tr>
-          <tr><td>Thai Standard</td><td>3</td><td>4 GB</td><td>60 GB</td><td>Unlimited</td><td>🇹🇭 Thailand</td><td>฿480</td></tr>
-          <tr><td>Thai Pro</td><td>4</td><td>8 GB</td><td>80 GB</td><td>Unlimited</td><td>🇹🇭 Thailand</td><td>฿720</td></tr>
-          <tr><td>Thai Ultra</td><td>6</td><td>16 GB</td><td>120 GB</td><td>Unlimited</td><td>🇹🇭 Thailand</td><td>฿1100</td></tr>
+          <tr><td>Basic</td><td>1</td><td>1 GB</td><td>25 GB</td><td>1 TB</td><td>🇹🇭 Thailand</td><td>฿180</td></tr>
+          <tr><td>Standard</td><td>2</td><td>2 GB</td><td>50 GB</td><td>2 TB</td><td>🇹🇭 Thailand</td><td>฿290</td></tr>
+          <tr><td>Pro</td><td>4</td><td>4 GB</td><td>80 GB</td><td>4 TB</td><td>🇹🇭 Thailand</td><td>฿440</td></tr>
+          <tr><td>Business</td><td>6</td><td>8 GB</td><td>160 GB</td><td>6 TB</td><td>🇹🇭 Thailand</td><td>฿790</td></tr>
+          <tr><td>Ultra</td><td>8</td><td>12 GB</td><td>240 GB</td><td>8 TB</td><td>🇹🇭 Thailand</td><td>฿1150</td></tr>
+          <tr><td>Extreme</td><td>12</td><td>16 GB</td><td>320 GB</td><td>10 TB</td><td>🇹🇭 Thailand</td><td>฿1490</td></tr>
+          <tr><td>Platinum</td><td>6</td><td>12 GB</td><td>300 GB</td><td>Unlimited</td><td>🇹🇭 Thailand</td><td>฿990</td></tr>
         </tbody>
       </table>
     </div>
@@ -245,13 +254,13 @@
     function copyWallet() {
       const text = document.getElementById('wallet').innerText;
       navigator.clipboard.writeText(text).then(() => {
-        alert("Wallet address copied!");
+        alert("PromptPay ID copied!");
       });
     }
 
     function orderPlan(plan) {
       const telegram = "https://t.me/YourTelegramUsername";
-      const message = encodeURIComponent(`Hi, I want to order the "${plan}" VPS plan.`);
+      const message = encodeURIComponent(`สนใจสั่งซื้อแพ็คเกจ VPS: ${plan}`);
       window.open(`${telegram}?text=${message}`, "_blank");
     }
   </script>
