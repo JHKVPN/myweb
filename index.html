@@ -15,6 +15,8 @@
       --card-border: rgba(255, 255, 255, 0.3);
       --primary: #1abc9c;
       --highlight: #e67e22;
+      --led-green: #00ff00;
+      --led-bg: #000000;
     }
     [data-theme="light"] {
       --bg-color: var(--bg-light);
@@ -39,26 +41,7 @@
     }
     h1 {
       font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
-    .marquee-led-matrix {
-      font-family: monospace;
-      font-size: 1rem;
-      color: #00ff00;
-      white-space: nowrap;
-      overflow: hidden;
-      letter-spacing: 0.2ch;
-      text-shadow: 0 0 2px #00ff00, 0 0 4px #00ff00, 0 0 6px #00ff00;
-      animation: marquee-matrix 20s linear infinite;
-      background: #000;
-      padding: 8px 0;
-      border-radius: 8px;
-      margin: 10px auto 30px;
-      max-width: 100%;
-    }
-    @keyframes marquee-matrix {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
+      margin-bottom: 5px;
     }
     .toggle-theme {
       position: absolute;
@@ -73,6 +56,36 @@
       font-weight: bold;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
+
+    .running-box {
+      background-color: var(--led-bg);
+      color: var(--led-green);
+      font-family: 'Courier New', monospace;
+      font-size: 1.1rem;
+      overflow: hidden;
+      width: 100%;
+      max-width: 800px;
+      margin: 10px auto 30px;
+      padding: 12px 0;
+      border-radius: 8px;
+      box-shadow: 0 0 20px #00ff00;
+      border: 2px solid #00ff00;
+    }
+    .running-text {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll-text 20s linear infinite;
+      white-space: nowrap;
+    }
+    @keyframes scroll-text {
+      from {
+        transform: translateX(0%);
+      }
+      to {
+        transform: translateX(-100%);
+      }
+    }
+
     .plans {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -122,7 +135,7 @@
     .buy-btn:hover {
       background: #16a085;
     }
-    .telegram, .payment, table {
+    .telegram, .payment {
       max-width: 700px;
       margin: 40px auto;
       background: var(--glass-bg);
@@ -147,17 +160,8 @@
       width: 160px;
       margin-top: 12px;
     }
-    table {
-      border-collapse: collapse;
-      width: 100%;
-    }
-    th, td {
-      padding: 10px;
-      border: 1px solid #ccc;
-      text-align: center;
-    }
-    input, button {
-      font-family: 'Inter', sans-serif;
+    .payment-method {
+      margin-bottom: 20px;
     }
     .promo {
       background: #f39c12;
@@ -178,67 +182,19 @@
     <h1>🔥 Choose Your VPS Plan</h1>
   </header>
 
-  <div class="marquee-led-matrix">
-    🚀 Fast & Secure Thailand VPS | Gamer & Business Ready | 24/7 Support | Order via Telegram!
+  <div class="running-box">
+    <div class="running-text">🚀 High-performance VPS for Thailand 🇹🇭 | Binance Pay & TrueMoney Accepted | 99.99% Uptime | Fast Support via Telegram 💬</div>
   </div>
 
   <section class="plans">
-    <div class="card">
-      <h2>Basic</h2>
-      <p>1 CPU • 1 GB RAM</p>
-      <p>25 GB SSD • Unlimited Bandwidth</p>
-      <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿180</p>
-      <button class="buy-btn" onclick="orderPlan('Basic')">Buy Now</button>
-    </div>
-    <div class="card">
-      <h2>Standard</h2>
-      <p>2 CPU • 2 GB RAM</p>
-      <p>50 GB SSD • Unlimited Bandwidth</p>
-      <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿290</p>
-      <button class="buy-btn" onclick="orderPlan('Standard')">Buy Now</button>
-    </div>
-    <div class="card">
-      <h2>Pro</h2>
-      <p>4 CPU • 4 GB RAM</p>
-      <p>80 GB SSD • Unlimited Bandwidth</p>
-      <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿440</p>
-      <button class="buy-btn" onclick="orderPlan('Pro')">Buy Now</button>
-    </div>
-    <div class="card">
-      <h2>Business</h2>
-      <p>6 CPU • 8 GB RAM</p>
-      <p>160 GB SSD • Unlimited Bandwidth</p>
-      <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿790</p>
-      <button class="buy-btn" onclick="orderPlan('Business')">Buy Now</button>
-    </div>
-    <div class="card">
-      <h2>Ultra</h2>
-      <p>8 CPU • 12 GB RAM</p>
-      <p>240 GB SSD • Unlimited Bandwidth</p>
-      <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿1150</p>
-      <button class="buy-btn" onclick="orderPlan('Ultra')">Buy Now</button>
-    </div>
-    <div class="card">
-      <h2>Extreme</h2>
-      <p>12 CPU • 16 GB RAM</p>
-      <p>320 GB SSD • Unlimited Bandwidth</p>
-      <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿1490</p>
-      <button class="buy-btn" onclick="orderPlan('Extreme')">Buy Now</button>
-    </div>
-    <div class="card">
-      <h2>Game Plan</h2>
-      <p>6 CPU • 12 GB RAM</p>
-      <p>100 GB SSD • Unlimited Bandwidth</p>
-      <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿690</p>
-      <button class="buy-btn" onclick="orderPlan('Game Plan')">Buy Now</button>
-    </div>
+    <!-- Repeat VPS Cards Here -->
+    <div class="card"><h2>Basic</h2><p>1 CPU • 1 GB RAM</p><p>25 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿180</p><button class="buy-btn" onclick="orderPlan('Basic')">Buy Now</button></div>
+    <div class="card"><h2>Standard</h2><p>2 CPU • 2 GB RAM</p><p>50 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿290</p><button class="buy-btn" onclick="orderPlan('Standard')">Buy Now</button></div>
+    <div class="card"><h2>Pro</h2><p>4 CPU • 4 GB RAM</p><p>80 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿440</p><button class="buy-btn" onclick="orderPlan('Pro')">Buy Now</button></div>
+    <div class="card"><h2>Business</h2><p>6 CPU • 8 GB RAM</p><p>160 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿790</p><button class="buy-btn" onclick="orderPlan('Business')">Buy Now</button></div>
+    <div class="card"><h2>Ultra</h2><p>8 CPU • 12 GB RAM</p><p>240 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿1150</p><button class="buy-btn" onclick="orderPlan('Ultra')">Buy Now</button></div>
+    <div class="card"><h2>Extreme</h2><p>12 CPU • 16 GB RAM</p><p>320 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿1490</p><button class="buy-btn" onclick="orderPlan('Extreme')">Buy Now</button></div>
+    <div class="card"><h2>Game Plan</h2><p>6 CPU • 12 GB RAM</p><p>100 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿690</p><button class="buy-btn" onclick="orderPlan('Game Plan')">Buy Now</button></div>
   </section>
 
   <div class="telegram">
@@ -247,10 +203,18 @@
   </div>
 
   <div class="payment">
-    <h3>💳 TrueMoney Wallet</h3>
-    <p>Number: <strong>098-xxx-xxxx</strong></p>
-    <p>OR scan QR below:</p>
-    <img src="https://yourdomain.com/truemoney-qr.png" alt="TrueMoney QR">
+    <div class="payment-method">
+      <h3>💳 TrueMoney Wallet</h3>
+      <p>Number: <strong>098-xxx-xxxx</strong></p>
+      <p>OR scan QR below:</p>
+      <img src="https://yourdomain.com/truemoney-qr.png" alt="TrueMoney QR">
+    </div>
+    <div class="payment-method">
+      <h3>🪙 Binance Pay</h3>
+      <p>Pay ID: <strong>binanceuser123</strong></p>
+      <p>Scan to pay:</p>
+      <img src="https://yourdomain.com/binance-qr.png" alt="Binance Pay QR">
+    </div>
   </div>
 
   <script>
