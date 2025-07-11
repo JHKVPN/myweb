@@ -41,10 +41,11 @@
       font-size: 2.5rem;
       margin-bottom: 5px;
     }
+
     .toggle-theme, .lang-switch {
-      position: absolute;
+      position: fixed;
       top: 20px;
-      cursor: pointer;
+      z-index: 9999;
       padding: 8px 16px;
       background: var(--primary);
       color: #fff;
@@ -52,13 +53,10 @@
       border-radius: 30px;
       font-weight: bold;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      cursor: pointer;
     }
-    .toggle-theme {
-      right: 20px;
-    }
-    .lang-switch {
-      left: 20px;
-    }
+    .toggle-theme { right: 20px; }
+    .lang-switch { left: 20px; }
 
     .running-text-box {
       background: #000;
@@ -138,7 +136,7 @@
     .buy-btn:hover {
       background: #16a085;
     }
-    .telegram, .payment {
+    .telegram, .payment, table {
       max-width: 700px;
       margin: 40px auto;
       background: var(--glass-bg);
@@ -176,21 +174,21 @@
       padding: 12px;
       font-weight: bold;
       border-radius: 8px;
+      margin-top: 60px;
       margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
     }
   </style>
 </head>
 <body>
+  <button class="lang-switch" onclick="switchLanguage()">🌐</button>
+  <button class="toggle-theme" onclick="toggleTheme()">🌓</button>
+
   <div class="promo">🎉 Get 10% OFF with code <u>JULY10</u> – Limited Time!</div>
-  <button class="toggle-theme" onclick="toggleTheme()">🌓 Mode</button>
-  <select class="lang-switch" onchange="changeLanguage(this.value)">
-    <option value="en">🇺🇸 English</option>
-    <option value="mm">🇲🇲 မြန်မာ</option>
-    <option value="th">🇹🇭 ไทย</option>
-  </select>
 
   <header>
-    <h1 data-i18n="choosePlan">🔥 Choose Your VPS Plan</h1>
+    <h1 id="header-title">🔥 Choose Your VPS Plan</h1>
     <div class="running-text-box">
       <div class="running-text-wrapper">
         <div class="running-text">💡 အကောင်းဆုံးနဲ့အတန်ဆုံး VPS Website • Fast Network • 24/7 Uptime • Telegram Support Available • Accepting Binance Pay & TrueMoney Wallet</div>
@@ -199,79 +197,124 @@
     </div>
   </header>
 
-  <section class="plans" id="plans-section">
-    <!-- Plan cards will be inserted here dynamically -->
+  <section class="plans" id="plans">
+    <!-- Plans will be rendered by JavaScript -->
   </section>
 
   <div class="telegram">
-    <a href="https://t.me/Pussy1990" target="_blank">📩 Order via Telegram</a>
-    <p data-i18n="contactHours">💬 တိုက်ရိုက်ဆက်သွယ်လို့ရမယ့်အချိန် (8AM - 8PM)</p>
+    <a href="https://t.me/Pussy1990" target="_blank">📩 <span data-lang="orderTelegram">Order via Telegram</span></a>
+    <p><span data-lang="contactHours">💬 တိုက်ရိုက်ဆက်သွယ်လို့ရမယ့်အချိန် (8AM - 8PM)</span></p>
   </div>
 
   <div class="payment">
     <div class="payment-method">
       <h3>💳 TrueMoney Wallet</h3>
-      <p>Number: <strong>095-3244-179</strong></p>
-      <p>OR scan QR below:</p>
+      <p><span data-lang="truemoney">Number:</span> <strong>095-3244-179</strong></p>
+      <p><span data-lang="scanQR">OR scan QR below:</span></p>
       <img src="https://yourdomain.com/truemoney-qr.png" alt="TrueMoney QR">
     </div>
     <div class="payment-method">
       <h3>🪙 Binance Pay</h3>
-      <p>Binance ID: <strong>219766442</strong></p>
-      <p>OR scan QR below:</p>
+      <p><span data-lang="binance">Binance ID:</span> <strong>219766442</strong></p>
+      <p><span data-lang="scanQR">OR scan QR below:</span></p>
       <img src="https://yourdomain.com/binancepay-qr.png" alt="Binance Pay QR">
     </div>
   </div>
 
   <script>
-    const translations = {
+    const languages = {
       en: {
-        choosePlan: "🔥 Choose Your VPS Plan",
-        contactHours: "💬 Contact hours (8AM - 8PM)"
-      },
-      mm: {
-        choosePlan: "🔥 သင့် VPS Plan ကို ရွေးချယ်ပါ",
-        contactHours: "💬 တိုက်ရိုက်ဆက်သွယ်လို့ရမယ့်အချိန် (မနက် ၈ - ည ၈)"
+        title: "🔥 Choose Your VPS Plan",
+        orderTelegram: "Order via Telegram",
+        contactHours: "💬 Contact Hours: 8AM - 8PM",
+        truemoney: "Number:",
+        binance: "Binance ID:",
+        scanQR: "OR scan QR below:",
+        plans: [
+          { name: "Basic", spec: "1 CPU • 1 GB RAM", storage: "25 GB SSD • Unlimited Bandwidth", price: "฿300" },
+          { name: "Standard", spec: "2 CPU • 2 GB RAM", storage: "50 GB SSD • Unlimited Bandwidth", price: "฿380" },
+          { name: "Pro", spec: "4 CPU • 4 GB RAM", storage: "80 GB SSD • Unlimited Bandwidth", price: "฿490" },
+          { name: "Business", spec: "6 CPU • 8 GB RAM", storage: "160 GB SSD • Unlimited Bandwidth", price: "฿790" },
+          { name: "Ultra", spec: "8 CPU • 12 GB RAM", storage: "240 GB SSD • Unlimited Bandwidth", price: "฿1150" },
+          { name: "Extreme", spec: "12 CPU • 16 GB RAM", storage: "320 GB SSD • Unlimited Bandwidth", price: "฿1490" },
+          { name: "Game Plan", spec: "6 CPU • 12 GB RAM", storage: "100 GB SSD • Unlimited Bandwidth", price: "฿690" },
+        ]
       },
       th: {
-        choosePlan: "🔥 เลือกแผน VPS ของคุณ",
-        contactHours: "💬 เวลาทำการติดต่อ (8AM - 8PM)"
+        title: "🔥 เลือกแผน VPS ของคุณ",
+        orderTelegram: "สั่งซื้อผ่าน Telegram",
+        contactHours: "💬 ติดต่อได้เวลา 8AM - 8PM",
+        truemoney: "หมายเลข:",
+        binance: "รหัส Binance:",
+        scanQR: "หรือสแกน QR ด้านล่าง:",
+        plans: [
+          { name: "Basic", spec: "1 CPU • 1 GB RAM", storage: "25 GB SSD • ไม่จำกัดแบนด์วิดท์", price: "฿300" },
+          { name: "Standard", spec: "2 CPU • 2 GB RAM", storage: "50 GB SSD • ไม่จำกัดแบนด์วิดท์", price: "฿380" },
+          { name: "Pro", spec: "4 CPU • 4 GB RAM", storage: "80 GB SSD • ไม่จำกัดแบนด์วิดท์", price: "฿490" },
+          { name: "Business", spec: "6 CPU • 8 GB RAM", storage: "160 GB SSD • ไม่จำกัดแบนด์วิดท์", price: "฿790" },
+          { name: "Ultra", spec: "8 CPU • 12 GB RAM", storage: "240 GB SSD • ไม่จำกัดแบนด์วิดท์", price: "฿1150" },
+          { name: "Extreme", spec: "12 CPU • 16 GB RAM", storage: "320 GB SSD • ไม่จำกัดแบนด์วิดท์", price: "฿1490" },
+          { name: "Game Plan", spec: "6 CPU • 12 GB RAM", storage: "100 GB SSD • ไม่จำกัดแบนด์วิดท์", price: "฿690" },
+        ]
+      },
+      mm: {
+        title: "🔥 မင်းအတွက် VPS Plan ရွေးပါ",
+        orderTelegram: "Telegram နဲ့ မှာယူပါ",
+        contactHours: "💬 ဆက်သွယ်နိုင်ချိန် (မနက် 8 - ည 8)",
+        truemoney: "နံပါတ်:",
+        binance: "Binance ID:",
+        scanQR: "သို့မဟုတ် QR ကို စကန်လုပ်ပါ:",
+        plans: [
+          { name: "Basic", spec: "1 CPU • 1 GB RAM", storage: "25 GB SSD • အမေရိကန်မည့်သုံးနိုင်", price: "฿300" },
+          { name: "Standard", spec: "2 CPU • 2 GB RAM", storage: "50 GB SSD • အမေရိကန်မည့်သုံးနိုင်", price: "฿380" },
+          { name: "Pro", spec: "4 CPU • 4 GB RAM", storage: "80 GB SSD • အမေရိကန်မည့်သုံးနိုင်", price: "฿490" },
+          { name: "Business", spec: "6 CPU • 8 GB RAM", storage: "160 GB SSD • အမေရိကန်မည့်သုံးနိုင်", price: "฿790" },
+          { name: "Ultra", spec: "8 CPU • 12 GB RAM", storage: "240 GB SSD • အမေရိကန်မည့်သုံးနိုင်", price: "฿1150" },
+          { name: "Extreme", spec: "12 CPU • 16 GB RAM", storage: "320 GB SSD • အမေရိကန်မည့်သုံးနိုင်", price: "฿1490" },
+          { name: "Game Plan", spec: "6 CPU • 12 GB RAM", storage: "100 GB SSD • အမေရိကန်မည့်သုံးနိုင်", price: "฿690" },
+        ]
       }
     };
 
-    const plans = [
-      { name: "Basic", cpu: "1 CPU", ram: "1 GB", storage: "25 GB SSD", price: "฿300" },
-      { name: "Standard", cpu: "2 CPU", ram: "2 GB", storage: "50 GB SSD", price: "฿380" },
-      { name: "Pro", cpu: "4 CPU", ram: "4 GB", storage: "80 GB SSD", price: "฿490" },
-      { name: "Business", cpu: "6 CPU", ram: "8 GB", storage: "160 GB SSD", price: "฿790" },
-      { name: "Ultra", cpu: "8 CPU", ram: "12 GB", storage: "240 GB SSD", price: "฿1150" },
-      { name: "Extreme", cpu: "12 CPU", ram: "16 GB", storage: "320 GB SSD", price: "฿1490" },
-      { name: "Game Plan", cpu: "6 CPU", ram: "12 GB", storage: "100 GB SSD", price: "฿690" }
-    ];
+    let currentLang = localStorage.getItem("lang") || "en";
+    function switchLanguage() {
+      const keys = Object.keys(languages);
+      const next = keys[(keys.indexOf(currentLang) + 1) % keys.length];
+      localStorage.setItem("lang", next);
+      currentLang = next;
+      renderLanguage();
+    }
 
-    function renderPlans() {
-      const container = document.getElementById("plans-section");
-      container.innerHTML = "";
-      plans.forEach(plan => {
-        container.innerHTML += `
-          <div class="card">
-            <h2>${plan.name}</h2>
-            <p>${plan.cpu} • ${plan.ram}</p>
-            <p>${plan.storage} • Unlimited Bandwidth</p>
-            <p>📍 🇹🇭 Thailand</p>
-            <p class="price">${plan.price}</p>
-            <button class="buy-btn" onclick="orderPlan('${plan.name}')">Buy Now</button>
-          </div>`;
+    function renderLanguage() {
+      const lang = languages[currentLang];
+      document.getElementById("header-title").textContent = lang.title;
+      document.querySelector('[data-lang="orderTelegram"]').textContent = lang.orderTelegram;
+      document.querySelector('[data-lang="contactHours"]').textContent = lang.contactHours;
+      document.querySelector('[data-lang="truemoney"]').textContent = lang.truemoney;
+      document.querySelector('[data-lang="binance"]').textContent = lang.binance;
+      document.querySelectorAll('[data-lang="scanQR"]').forEach(e => e.textContent = lang.scanQR);
+
+      const plansContainer = document.getElementById("plans");
+      plansContainer.innerHTML = "";
+      lang.plans.forEach(plan => {
+        const div = document.createElement("div");
+        div.className = "card";
+        div.innerHTML = `
+          <h2>${plan.name}</h2>
+          <p>${plan.spec}</p>
+          <p>${plan.storage}</p>
+          <p>📍 🇹🇭 Thailand</p>
+          <p class="price">${plan.price}</p>
+          <button class="buy-btn" onclick="orderPlan('${plan.name}')">Buy Now</button>
+        `;
+        plansContainer.appendChild(div);
       });
     }
 
-    function changeLanguage(lang) {
-      const texts = translations[lang];
-      document.querySelectorAll("[data-i18n]").forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        if (texts[key]) el.textContent = texts[key];
-      });
-      localStorage.setItem("lang", lang);
+    function orderPlan(plan) {
+      const telegram = "https://t.me/Pussy1990";
+      const message = encodeURIComponent(`Hi, I want to order the "${plan}" VPS plan.`);
+      window.open(`${telegram}?text=${message}`, "_blank");
     }
 
     function toggleTheme() {
@@ -282,20 +325,10 @@
       localStorage.setItem("theme", next);
     }
 
-    function orderPlan(plan) {
-      const telegram = "https://t.me/Pussy1990";
-      const message = encodeURIComponent(`Hi, I want to order the "${plan}" VPS plan.`);
-      window.open(`${telegram}?text=${message}`, "_blank");
-    }
-
-    // Load saved settings
     document.addEventListener("DOMContentLoaded", () => {
-      const savedTheme = localStorage.getItem("theme") || "light";
-      const savedLang = localStorage.getItem("lang") || "en";
-      document.documentElement.setAttribute("data-theme", savedTheme);
-      document.querySelector(".lang-switch").value = savedLang;
-      changeLanguage(savedLang);
-      renderPlans();
+      document.documentElement.setAttribute("data-theme", localStorage.getItem("theme") || "light");
+      currentLang = localStorage.getItem("lang") || "en";
+      renderLanguage();
     });
   </script>
 </body>
