@@ -55,21 +55,25 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
     .running-text-box {
+      position: relative;
       background: #000;
       border-radius: 8px;
-      padding: 8px;
-      width: 800px;
+      padding: 8px 0;
+      width: 100%;
+      max-width: 800px;
       margin: 0 auto 30px;
       overflow: hidden;
       box-shadow: 0 0 8px #00ff00;
+      height: 26px;
     }
     .running-text {
-      display: inline-block;
+      position: absolute;
       white-space: nowrap;
       color: #00ff00;
       font-family: 'Courier New', monospace;
       font-size: 16px;
       animation: scrollText 60s linear infinite;
+      will-change: transform;
     }
     @keyframes scrollText {
       0% { transform: translateX(100%); }
