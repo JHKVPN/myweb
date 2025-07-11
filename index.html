@@ -79,6 +79,17 @@
       color: var(--highlight);
       margin-top: 8px;
     }
+    .buy-btn {
+      margin-top: 10px;
+      width: 100%;
+      padding: 10px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
     .telegram, .payment {
       text-align: center;
       margin-top: 40px;
@@ -138,8 +149,48 @@
   </header>
 
   <section class="plans">
-    <!-- VPS Plans Here (unchanged) -->
-    <!-- ... -->
+    <div class="card">
+      <h2>Basic</h2>
+      <p>1 CPU • 1 GB RAM</p>
+      <p>25 GB SSD • 1 TB Bandwidth</p>
+      <p class="price">฿180</p>
+      <button class="buy-btn" onclick="orderPlan('Basic')">Buy Now</button>
+    </div>
+    <div class="card">
+      <h2>Standard</h2>
+      <p>2 CPU • 2 GB RAM</p>
+      <p>50 GB SSD • 2 TB Bandwidth</p>
+      <p class="price">฿290</p>
+      <button class="buy-btn" onclick="orderPlan('Standard')">Buy Now</button>
+    </div>
+    <div class="card">
+      <h2>Pro</h2>
+      <p>4 CPU • 4 GB RAM</p>
+      <p>80 GB SSD • 4 TB Bandwidth</p>
+      <p class="price">฿440</p>
+      <button class="buy-btn" onclick="orderPlan('Pro')">Buy Now</button>
+    </div>
+    <div class="card">
+      <h2>Business</h2>
+      <p>6 CPU • 8 GB RAM</p>
+      <p>160 GB SSD • 6 TB Bandwidth</p>
+      <p class="price">฿790</p>
+      <button class="buy-btn" onclick="orderPlan('Business')">Buy Now</button>
+    </div>
+    <div class="card">
+      <h2>Ultra</h2>
+      <p>8 CPU • 12 GB RAM</p>
+      <p>240 GB SSD • 8 TB Bandwidth</p>
+      <p class="price">฿1150</p>
+      <button class="buy-btn" onclick="orderPlan('Ultra')">Buy Now</button>
+    </div>
+    <div class="card">
+      <h2>Extreme</h2>
+      <p>12 CPU • 16 GB RAM</p>
+      <p>320 GB SSD • 10 TB Bandwidth</p>
+      <p class="price">฿1490</p>
+      <button class="buy-btn" onclick="orderPlan('Extreme')">Buy Now</button>
+    </div>
   </section>
 
   <div class="telegram">
@@ -176,38 +227,6 @@
     </div>
   </section>
 
-  <section class="card" style="margin-top: 40px;">
-    <h2>❓ Frequently Asked Questions</h2>
-    <p><strong>Q: VPS ဘယ်လောက်ကြာမှရမလဲ?</strong><br>A: 10-30 မိနစ်အတွင်းပေးပို့ပါတယ်။</p>
-    <p><strong>Q: OS ရွေးလို့ရလား?</strong><br>A: Windows, Linux စိတ်ကြိုက်ရွေးနိုင်ပါတယ်။</p>
-    <p><strong>Q: Refund ရမလား?</strong><br>A: တစ်ခါ setup ပြီးပြီးရင် မရပါ။</p>
-  </section>
-
-  <section class="card" style="margin-top: 30px;">
-    <h2>🌟 What Our Customers Say</h2>
-    <p>"Very stable VPS for my Forex bot. Highly recommend!"<br><strong>– Nay Chi</strong></p>
-    <p>"Fast support and setup. Will buy again."<br><strong>– Ko Tun</strong></p>
-  </section>
-
-  <section class="card" style="margin-top: 30px;">
-    <h3>🎁 Got a Promo Code?</h3>
-    <input type="text" placeholder="Enter promo code" style="padding: 10px; width: 100%; border-radius: 8px; margin-bottom: 10px;">
-    <button style="padding: 10px 20px; background: var(--primary); color: white; border: none; border-radius: 8px;">Apply</button>
-  </section>
-
-  <div class="card" style="margin-top: 20px;">
-    <h3>✅ Network Status</h3>
-    <p>All Systems Operational ✅</p>
-    <p>Last Check: <span id="lastCheck"></span></p>
-  </div>
-
-  <div class="card" style="margin-top: 30px; text-align:center;">
-    <p>🔒 Secure Checkout — Verified Seller</p>
-    <img src="https://img.icons8.com/fluency/48/000000/ssl.png" />
-    <img src="https://img.icons8.com/color/48/000000/verified-badge.png" />
-    <img src="https://img.icons8.com/color/48/000000/usdt.png" />
-  </div>
-
   <script>
     function toggleTheme() {
       const html = document.documentElement;
@@ -216,16 +235,24 @@
       html.setAttribute("data-theme", next);
       localStorage.setItem("theme", next);
     }
+
     document.addEventListener("DOMContentLoaded", () => {
       const saved = localStorage.getItem("theme");
       if (saved) document.documentElement.setAttribute("data-theme", saved);
       document.getElementById("lastCheck").textContent = new Date().toLocaleString();
     });
+
     function copyWallet() {
       const text = document.getElementById('wallet').innerText;
       navigator.clipboard.writeText(text).then(() => {
         alert("Wallet address copied!");
       });
+    }
+
+    function orderPlan(plan) {
+      const telegram = "https://t.me/YourTelegramUsername"; // Change this
+      const message = encodeURIComponent(`Hi, I want to order the "${plan}" VPS plan.`);
+      window.open(`${telegram}?text=${message}`, "_blank");
     }
   </script>
 
