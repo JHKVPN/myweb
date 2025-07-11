@@ -3,189 +3,175 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>VPS Plans 🇹🇭</title>
+  <title>VPS Plans - Thailand 🇹🇭</title>
   <style>
     body {
+      margin: 0;
+      font-family: Arial, sans-serif;
       background-color: #000;
       color: #0f0;
-      font-family: monospace;
-      margin: 0;
-      padding: 0;
+      transition: background-color 0.3s, color 0.3s;
     }
-
     .container {
       max-width: 800px;
-      margin: auto;
+      margin: 20px auto;
       padding: 20px;
+      background-color: #111;
+      border-radius: 10px;
     }
-
     .led-box {
       background-color: black;
-      color: #0f0;
-      border: 2px solid #0f0;
       padding: 10px;
+      border: 2px solid #0f0;
+      font-family: monospace;
       overflow: hidden;
       white-space: nowrap;
-      box-sizing: border-box;
+      position: relative;
     }
-
     .led-text {
       display: inline-block;
-      padding-left: 100%;
-      animation: scroll-left 15s linear infinite;
+      animation: scroll 15s linear infinite;
     }
-
-    @keyframes scroll-left {
-      0% {
-        transform: translateX(0%);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
+    @keyframes scroll {
+      from { transform: translateX(100%); }
+      to { transform: translateX(-100%); }
     }
-
     .vps-plans {
       margin-top: 20px;
     }
-
     .vps-plan {
       border: 1px solid #0f0;
-      border-radius: 8px;
-      padding: 10px;
-      margin-bottom: 15px;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
     }
-
-    .faq, .server-status {
-      margin-top: 30px;
-      border: 1px solid #0f0;
-      border-radius: 8px;
-      padding: 10px;
-    }
-
-    .faq h2, .server-status h2 {
+    .dark-mode {
+      background-color: #000;
       color: #0f0;
     }
-
-    .dark-toggle {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      background: #0f0;
-      color: #000;
+    .toggle {
+      margin: 10px 0;
+    }
+    .language-switcher button {
+      margin: 5px;
+      background: #222;
+      color: #0f0;
+      border: 1px solid #0f0;
       padding: 5px 10px;
       cursor: pointer;
-      border-radius: 5px;
     }
-
-    .dark-mode {
-      background-color: #111;
-      color: #eee;
+    .faq, .status {
+      margin-top: 20px;
     }
-
-    .dark-mode .led-box {
-      border-color: #0f0;
+    .faq h4, .status h4 {
+      margin-bottom: 5px;
+    }
+    .social-links {
+      margin-top: 20px;
+    }
+    .social-links a {
+      margin-right: 10px;
       color: #0f0;
-    }
-
-    .footer {
-      margin-top: 30px;
-      text-align: center;
-      font-size: 14px;
-    }
-
-    .social {
-      margin-top: 10px;
-    }
-
-    .social a {
-      color: #0f0;
-      margin: 0 10px;
-      text-decoration: none;
-    }
-
-    .telegram-button {
-      display: block;
-      margin: 20px auto;
-      background: #0088cc;
-      color: white;
-      padding: 10px 20px;
-      text-align: center;
-      border-radius: 8px;
-      text-decoration: none;
-      width: fit-content;
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <div class="dark-toggle" onclick="toggleDarkMode()">🌓 Toggle Dark Mode</div>
-  <div class="container">
 
-    <!-- 🎉 LED Promo Banner -->
-    <div class="led-box">
-      <div class="led-text">🔥 PROMO: Get 20% OFF all VPS Plans — Pay with TrueMoney 🇹🇭 or Binance Pay USDT 🔥</div>
-    </div>
+<div class="container">
 
-    <!-- 🧾 VPS Plans -->
-    <div class="vps-plans">
-      <div class="vps-plan">
-        <h3>VPS Plan A</h3>
-        <p>1 vCPU | 1GB RAM | 20GB SSD</p>
-        <p>Price: 100฿/month</p>
-        <p>💳 Payment: TrueMoney 🇹🇭, Binance Pay (USDT)</p>
-      </div>
-      <div class="vps-plan">
-        <h3>VPS Plan B</h3>
-        <p>2 vCPU | 2GB RAM | 40GB SSD</p>
-        <p>Price: 200฿/month</p>
-        <p>💳 Payment: TrueMoney 🇹🇭, Binance Pay (USDT)</p>
-      </div>
-      <div class="vps-plan">
-        <h3>VPS Plan C</h3>
-        <p>4 vCPU | 4GB RAM | 80GB SSD</p>
-        <p>Price: 400฿/month</p>
-        <p>💳 Payment: TrueMoney 🇹🇭, Binance Pay (USDT)</p>
-      </div>
-      <p style="text-align:center; color:gray;">We accept: TrueMoney Wallet 🇹🇭 & Binance Pay (USDT)</p>
-    </div>
-
-    <!-- 📞 Telegram Order Button -->
-    <a class="telegram-button" href="https://t.me/YourTelegramBot" target="_blank">📲 Order via Telegram</a>
-
-    <!-- ✅ Server Status -->
-    <div class="server-status">
-      <h2>🔌 Server Status</h2>
-      <p>🟢 All systems operational</p>
-    </div>
-
-    <!-- ❓ FAQ -->
-    <div class="faq">
-      <h2>❓ Frequently Asked Questions</h2>
-      <p><strong>Q: How do I pay?</strong><br>A: You can pay via TrueMoney 🇹🇭 or Binance Pay (USDT).</p>
-      <p><strong>Q: How long does setup take?</strong><br>A: VPS setup is usually completed within 5 minutes after payment confirmation.</p>
-      <p><strong>Q: Can I upgrade later?</strong><br>A: Yes, you can upgrade your plan anytime.</p>
-    </div>
-
-    <!-- 🔗 Social Links -->
-    <div class="footer">
-      <div class="social">
-        <a href="https://m.me/YourPage" target="_blank">💬 Messenger</a>
-        <a href="https://t.me/YourTelegramBot" target="_blank">📲 Telegram</a>
-      </div>
-    </div>
+  <div class="led-box">
+    <div class="led-text" id="promoText">🔥 PROMO: Get 20% OFF on all VPS plans for first 3 months! Limited time only! 🔥</div>
   </div>
 
-  <script>
-    // 🌙 Dark Mode Persistence
-    function toggleDarkMode() {
-      document.body.classList.toggle("dark-mode");
-      localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+  <div class="toggle">
+    <label><input type="checkbox" id="darkModeToggle"> Toggle Dark Mode</label>
+  </div>
+
+  <div class="language-switcher">
+    <button onclick="setLanguage('en')">🇺🇸 English</button>
+    <button onclick="setLanguage('th')">🇹🇭 ไทย</button>
+    <button onclick="setLanguage('mm')">🇲🇲 မြန်မာ</button>
+  </div>
+
+  <div class="vps-plans">
+    <h2 id="plansTitle">💻 VPS Plans (Thailand 🇹🇭)</h2>
+
+    <div class="vps-plan">
+      <h3>🇹🇭 VPS Plan A</h3>
+      <p>1 vCPU | 1GB RAM | 20GB SSD</p>
+      <p>💰 Price: 100฿/month</p>
+      <p>💳 Payment: 🟠 TrueMoney, 🪙 Binance Pay (USDT)</p>
+    </div>
+
+    <div class="vps-plan">
+      <h3>🇹🇭 VPS Plan B</h3>
+      <p>2 vCPU | 2GB RAM | 40GB SSD</p>
+      <p>💰 Price: 200฿/month</p>
+      <p>💳 Payment: 🟠 TrueMoney, 🪙 Binance Pay (USDT)</p>
+    </div>
+
+    <div class="vps-plan">
+      <h3>🇹🇭 VPS Plan C</h3>
+      <p>4 vCPU | 4GB RAM | 80GB SSD</p>
+      <p>💰 Price: 400฿/month</p>
+      <p>💳 Payment: 🟠 TrueMoney, 🪙 Binance Pay (USDT)</p>
+    </div>
+
+    <p style="text-align:center;">We accept: 🟠 TrueMoney Wallet 🇹🇭 & 🪙 Binance Pay (USDT)</p>
+  </div>
+
+  <div class="status">
+    <h4>🔌 Server Status:</h4>
+    <p id="serverStatus">🟢 Online</p>
+  </div>
+
+  <div class="faq">
+    <h4>❓ FAQ</h4>
+    <p><strong>Q:</strong> How do I order a VPS?<br><strong>A:</strong> Click the Telegram button below or message us via Facebook.</p>
+    <p><strong>Q:</strong> Which payments are accepted?<br><strong>A:</strong> We accept TrueMoney and Binance Pay (USDT).</p>
+    <p><strong>Q:</strong> Is this service for Thailand only?<br><strong>A:</strong> VPS nodes are in 🇹🇭 Thailand, but customers from anywhere are welcome.</p>
+  </div>
+
+  <div class="social-links">
+    <a href="https://t.me/your_telegram_bot" target="_blank">📲 Order via Telegram</a>
+    <a href="https://m.me/your_facebook_page" target="_blank">💬 Message on Facebook</a>
+  </div>
+
+</div>
+
+<script>
+  // Dark mode toggle + persist
+  const darkToggle = document.getElementById("darkModeToggle");
+  const isDark = localStorage.getItem("darkMode") === "true";
+  if (isDark) {
+    document.body.classList.add("dark-mode");
+    darkToggle.checked = true;
+  }
+  darkToggle.addEventListener("change", () => {
+    document.body.classList.toggle("dark-mode");
+    localStorage.setItem("darkMode", darkToggle.checked);
+  });
+
+  // Language switcher
+  const translations = {
+    en: {
+      plansTitle: "💻 VPS Plans (Thailand 🇹🇭)",
+    },
+    th: {
+      plansTitle: "💻 แพ็คเกจ VPS (ประเทศไทย 🇹🇭)",
+    },
+    mm: {
+      plansTitle: "💻 VPS စီမံကိန်းများ (ထိုင်းနိုင်ငံ 🇹🇭)",
     }
-    // Restore mode on load
-    window.onload = () => {
-      if (localStorage.getItem("darkMode") === "true") {
-        document.body.classList.add("dark-mode");
-      }
-    };
-  </script>
+  };
+  function setLanguage(lang) {
+    const t = translations[lang];
+    if (t) {
+      document.getElementById("plansTitle").innerText = t.plansTitle;
+    }
+  }
+</script>
+
 </body>
 </html>
