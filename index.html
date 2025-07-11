@@ -7,38 +7,39 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-light: #f4f6f8;
+      --bg-light: #ecf0f3;
       --bg-dark: #121212;
       --text-light: #000;
       --text-dark: #fff;
-      --card-light: #fff;
-      --card-dark: #1e1e1e;
+      --glass-bg: rgba(255, 255, 255, 0.2);
+      --card-border: rgba(255, 255, 255, 0.3);
       --primary: #1abc9c;
       --highlight: #e67e22;
     }
     [data-theme="light"] {
       --bg-color: var(--bg-light);
       --text-color: var(--text-light);
-      --card-color: var(--card-light);
     }
     [data-theme="dark"] {
       --bg-color: var(--bg-dark);
       --text-color: var(--text-dark);
-      --card-color: var(--card-dark);
     }
     body {
+      margin: 0;
       background: var(--bg-color);
       color: var(--text-color);
       font-family: 'Inter', sans-serif;
       padding: 20px;
       transition: background 0.3s, color 0.3s;
+      backdrop-filter: blur(5px);
     }
     header {
       text-align: center;
       margin-bottom: 30px;
     }
     h1 {
-      font-size: 2.4rem;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
     }
     .toggle-theme {
       position: absolute;
@@ -51,97 +52,107 @@
       border: none;
       border-radius: 30px;
       font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
     .plans {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 20px;
     }
     .card {
-      background: var(--card-color);
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: background 0.3s;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      padding: 24px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      border: 1px solid var(--card-border);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.15);
     }
     .card h2 {
-      font-size: 1.2rem;
       color: var(--primary);
+      font-size: 1.3rem;
       margin-bottom: 10px;
     }
     .card p {
       font-size: 0.95rem;
-      margin-bottom: 5px;
+      margin: 5px 0;
     }
     .price {
       font-size: 1.1rem;
       font-weight: bold;
       color: var(--highlight);
-      margin-top: 8px;
+      margin-top: 10px;
     }
     .buy-btn {
-      margin-top: 10px;
+      margin-top: 14px;
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       background: var(--primary);
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       font-weight: bold;
       cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     }
-    .telegram, .payment {
-      text-align: center;
-      margin-top: 40px;
+    .buy-btn:hover {
+      background: #16a085;
+    }
+    .telegram, .payment, table {
+      max-width: 700px;
+      margin: 40px auto;
+      background: var(--glass-bg);
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      border: 1px solid var(--card-border);
     }
     .telegram a {
       background: #0088cc;
       color: white;
-      padding: 14px 28px;
+      padding: 12px 24px;
       border-radius: 30px;
       text-decoration: none;
       font-weight: bold;
       display: inline-block;
-      transition: background 0.3s;
     }
     .telegram a:hover {
       background: #0070aa;
     }
-    .payment {
-      background: var(--card-color);
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      margin: 0 auto;
-      max-width: 500px;
-    }
     .payment img {
       width: 160px;
-      margin-top: 10px;
+      margin-top: 12px;
     }
     table {
-      width: 100%;
       border-collapse: collapse;
-      margin-top: 30px;
+      width: 100%;
     }
     th, td {
-      border: 1px solid #ccc;
       padding: 10px;
-    }
-    th {
-      background: var(--card-color);
+      border: 1px solid #ccc;
+      text-align: center;
     }
     input, button {
       font-family: 'Inter', sans-serif;
+    }
+    .promo {
+      background: #f39c12;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-weight: bold;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
 
-  <div style="background: #f39c12; color: white; text-align:center; padding:10px; font-weight:bold;">
-    🎉 Get 10% OFF with code <u>JULY10</u> – Limited Time!
-  </div>
-
+  <div class="promo">🎉 Get 10% OFF with code <u>JULY10</u> – Limited Time!</div>
   <button class="toggle-theme" onclick="toggleTheme()">🌓 Mode</button>
 
   <header>
@@ -149,13 +160,12 @@
   </header>
 
   <section class="plans">
-    <!-- Original Plans -->
     <div class="card">
       <h2>Basic</h2>
       <p>1 CPU • 1 GB RAM</p>
-      <p>30 GB SSD • Unlimited Bandwidth</p>
+      <p>25 GB SSD • Unlimited Bandwidth</p>
       <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿150</p>
+      <p class="price">฿180</p>
       <button class="buy-btn" onclick="orderPlan('Basic')">Buy Now</button>
     </div>
     <div class="card">
@@ -163,50 +173,48 @@
       <p>2 CPU • 2 GB RAM</p>
       <p>50 GB SSD • Unlimited Bandwidth</p>
       <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿250</p>
+      <p class="price">฿290</p>
       <button class="buy-btn" onclick="orderPlan('Standard')">Buy Now</button>
     </div>
     <div class="card">
       <h2>Pro</h2>
-      <p>3 CPU • 4 GB RAM</p>
+      <p>4 CPU • 4 GB RAM</p>
       <p>80 GB SSD • Unlimited Bandwidth</p>
       <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿450</p>
+      <p class="price">฿440</p>
       <button class="buy-btn" onclick="orderPlan('Pro')">Buy Now</button>
     </div>
     <div class="card">
-      <h2>Extreme</h2>
-      <p>4 CPU • 8 GB RAM</p>
-      <p>120 GB SSD • Unlimited Bandwidth</p>
+      <h2>Business</h2>
+      <p>6 CPU • 8 GB RAM</p>
+      <p>160 GB SSD • Unlimited Bandwidth</p>
       <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿690</p>
+      <p class="price">฿790</p>
+      <button class="buy-btn" onclick="orderPlan('Business')">Buy Now</button>
+    </div>
+    <div class="card">
+      <h2>Ultra</h2>
+      <p>8 CPU • 12 GB RAM</p>
+      <p>240 GB SSD • Unlimited Bandwidth</p>
+      <p>📍 🇹🇭 Thailand</p>
+      <p class="price">฿1150</p>
+      <button class="buy-btn" onclick="orderPlan('Ultra')">Buy Now</button>
+    </div>
+    <div class="card">
+      <h2>Extreme</h2>
+      <p>12 CPU • 16 GB RAM</p>
+      <p>320 GB SSD • Unlimited Bandwidth</p>
+      <p>📍 🇹🇭 Thailand</p>
+      <p class="price">฿1490</p>
       <button class="buy-btn" onclick="orderPlan('Extreme')">Buy Now</button>
     </div>
-
-    <!-- New Game Plans -->
     <div class="card">
       <h2>Game Plan</h2>
-      <p>6 CPU • 8 GB RAM</p>
-      <p>150 GB SSD • Unlimited Bandwidth</p>
-      <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿890</p>
-      <button class="buy-btn" onclick="orderPlan('Game Plan')">Buy Now</button>
-    </div>
-    <div class="card">
-      <h2>Minecraft Server</h2>
-      <p>4 CPU • 6 GB RAM</p>
-      <p>80 GB SSD • Unlimited Bandwidth</p>
+      <p>6 CPU • 12 GB RAM</p>
+      <p>100 GB SSD • Unlimited Bandwidth</p>
       <p>📍 🇹🇭 Thailand</p>
       <p class="price">฿690</p>
-      <button class="buy-btn" onclick="orderPlan('Minecraft Server')">Buy Now</button>
-    </div>
-    <div class="card">
-      <h2>FiveM RP</h2>
-      <p>8 CPU • 10 GB RAM</p>
-      <p>200 GB SSD • Unlimited Bandwidth</p>
-      <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿990</p>
-      <button class="buy-btn" onclick="orderPlan('FiveM RP')">Buy Now</button>
+      <button class="buy-btn" onclick="orderPlan('Game Plan')">Buy Now</button>
     </div>
   </section>
 
@@ -216,11 +224,10 @@
   </div>
 
   <div class="payment">
-    <h3>💳 Payment Methods</h3>
-    <p><strong>Binance (USDT - TRC20)</strong>: <span id="wallet">TXZ1EXAMPLEYOURWALLETADDRESS</span> <button onclick="copyWallet()">📋 Copy</button></p>
-    <p><strong>TrueMoney Wallet</strong>: 098-XXXXXXX</p>
-    <img src="https://yourdomain.com/images/binance-qr.png" alt="Binance QR">
-    <p>Send payment and confirm via Telegram</p>
+    <h3>💳 TrueMoney Wallet</h3>
+    <p>Number: <strong>098-xxx-xxxx</strong></p>
+    <p>OR scan QR below:</p>
+    <img src="https://yourdomain.com/truemoney-qr.png" alt="TrueMoney QR">
   </div>
 
   <script>
@@ -232,19 +239,11 @@
       localStorage.setItem("theme", next);
     }
 
-    function copyWallet() {
-      const text = document.getElementById('wallet').innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        alert("Wallet address copied!");
-      });
-    }
-
     function orderPlan(plan) {
       const telegram = "https://t.me/YourTelegramUsername";
       const message = encodeURIComponent(`Hi, I want to order the "${plan}" VPS plan.`);
       window.open(`${telegram}?text=${message}`, "_blank");
     }
   </script>
-
 </body>
 </html>
