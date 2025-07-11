@@ -41,11 +41,9 @@
       font-size: 2.5rem;
       margin-bottom: 5px;
     }
-    .toggle-theme {
+    .toggle-theme, .lang-switch {
       position: absolute;
-      right: 20px;
       top: 20px;
-      cursor: pointer;
       padding: 8px 16px;
       background: var(--primary);
       color: #fff;
@@ -53,9 +51,11 @@
       border-radius: 30px;
       font-weight: bold;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      cursor: pointer;
     }
+    .toggle-theme { right: 20px; }
+    .lang-switch { left: 20px; }
 
-    /* ✅ Running Text */
     .running-text-box {
       background: #000;
       border-radius: 8px;
@@ -134,7 +134,8 @@
     .buy-btn:hover {
       background: #16a085;
     }
-    .telegram, .payment, table {
+
+    .telegram, .payment {
       max-width: 700px;
       margin: 40px auto;
       background: var(--glass-bg);
@@ -179,6 +180,7 @@
 <body>
   <div class="promo">🎉 Get 10% OFF with code <u>JULY10</u> – Limited Time!</div>
   <button class="toggle-theme" onclick="toggleTheme()">🌓 Mode</button>
+  <button class="lang-switch" onclick="switchLang()">🌐 Language</button>
 
   <header>
     <h1>🔥 Choose Your VPS Plan</h1>
@@ -235,7 +237,14 @@
       window.open(`${telegram}?text=${message}`, "_blank");
     }
 
-    // Restore theme on load
+    function switchLang() {
+      const current = document.documentElement.lang;
+      const langs = ["en", "my", "th"];
+      const next = langs[(langs.indexOf(current) + 1) % langs.length];
+      document.documentElement.lang = next;
+      alert("Language switched to: " + next.toUpperCase());
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
       const savedTheme = localStorage.getItem("theme") || "light";
       document.documentElement.setAttribute("data-theme", savedTheme);
