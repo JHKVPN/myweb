@@ -54,31 +54,37 @@
       font-weight: bold;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
+
+    /* ✅ Running Text */
     .running-text-box {
       background: #000;
       border-radius: 8px;
-      padding: 8px;
+      padding: 8px 0;
       width: 100%;
       max-width: 800px;
       margin: 0 auto 30px;
       overflow: hidden;
       box-shadow: 0 0 8px #00ff00;
       position: relative;
-      height: 24px;
+      height: 26px;
+    }
+    .running-text-wrapper {
+      display: flex;
+      width: max-content;
+      animation: scrollLoop 25s linear infinite;
     }
     .running-text {
-      position: absolute;
       white-space: nowrap;
       color: #00ff00;
       font-family: 'Courier New', monospace;
       font-size: 16px;
-      animation: scrollText 20s linear infinite;
-      will-change: transform;
+      padding-right: 100px;
     }
-    @keyframes scrollText {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
+    @keyframes scrollLoop {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
+
     .plans {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -177,7 +183,10 @@
   <header>
     <h1>🔥 Choose Your VPS Plan</h1>
     <div class="running-text-box">
-      <div class="running-text">💡 အကောင်းဆုံးနဲ့အတန်ဆုံး VPS Website • Fast Network • 24/7 Uptime • Telegram Support Available • Accepting Binance Pay & TrueMoney Wallet</div>
+      <div class="running-text-wrapper">
+        <div class="running-text">💡 အကောင်းဆုံးနဲ့အတန်ဆုံး VPS Website • Fast Network • 24/7 Uptime • Telegram Support Available • Accepting Binance Pay & TrueMoney Wallet</div>
+        <div class="running-text">💡 အကောင်းဆုံးနဲ့အတန်ဆုံး VPS Website • Fast Network • 24/7 Uptime • Telegram Support Available • Accepting Binance Pay & TrueMoney Wallet</div>
+      </div>
     </div>
   </header>
 
