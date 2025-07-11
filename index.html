@@ -153,6 +153,7 @@
       <h2>Basic</h2>
       <p>1 CPU • 1 GB RAM</p>
       <p>25 GB SSD • 1 TB Bandwidth</p>
+      <p>📍 🇸🇬 Singapore</p>
       <p class="price">฿180</p>
       <button class="buy-btn" onclick="orderPlan('Basic')">Buy Now</button>
     </div>
@@ -160,6 +161,7 @@
       <h2>Standard</h2>
       <p>2 CPU • 2 GB RAM</p>
       <p>50 GB SSD • 2 TB Bandwidth</p>
+      <p>📍 🇯🇵 Tokyo</p>
       <p class="price">฿290</p>
       <button class="buy-btn" onclick="orderPlan('Standard')">Buy Now</button>
     </div>
@@ -167,6 +169,7 @@
       <h2>Pro</h2>
       <p>4 CPU • 4 GB RAM</p>
       <p>80 GB SSD • 4 TB Bandwidth</p>
+      <p>📍 🇺🇸 Los Angeles</p>
       <p class="price">฿440</p>
       <button class="buy-btn" onclick="orderPlan('Pro')">Buy Now</button>
     </div>
@@ -174,6 +177,7 @@
       <h2>Business</h2>
       <p>6 CPU • 8 GB RAM</p>
       <p>160 GB SSD • 6 TB Bandwidth</p>
+      <p>📍 🇩🇪 Frankfurt</p>
       <p class="price">฿790</p>
       <button class="buy-btn" onclick="orderPlan('Business')">Buy Now</button>
     </div>
@@ -181,6 +185,7 @@
       <h2>Ultra</h2>
       <p>8 CPU • 12 GB RAM</p>
       <p>240 GB SSD • 8 TB Bandwidth</p>
+      <p>📍 🇨🇦 Toronto</p>
       <p class="price">฿1150</p>
       <button class="buy-btn" onclick="orderPlan('Ultra')">Buy Now</button>
     </div>
@@ -188,6 +193,7 @@
       <h2>Extreme</h2>
       <p>12 CPU • 16 GB RAM</p>
       <p>320 GB SSD • 10 TB Bandwidth</p>
+      <p>📍 🇳🇱 Amsterdam</p>
       <p class="price">฿1490</p>
       <button class="buy-btn" onclick="orderPlan('Extreme')">Buy Now</button>
     </div>
@@ -213,15 +219,15 @@
     <div style="overflow-x:auto;">
       <table>
         <thead>
-          <tr><th>Plan</th><th>CPU</th><th>RAM</th><th>SSD</th><th>Bandwidth</th><th>Price</th></tr>
+          <tr><th>Plan</th><th>CPU</th><th>RAM</th><th>SSD</th><th>Bandwidth</th><th>Location</th><th>Price</th></tr>
         </thead>
         <tbody>
-          <tr><td>Basic</td><td>1</td><td>1 GB</td><td>25 GB</td><td>1 TB</td><td>฿180</td></tr>
-          <tr><td>Standard</td><td>2</td><td>2 GB</td><td>50 GB</td><td>2 TB</td><td>฿290</td></tr>
-          <tr><td>Pro</td><td>4</td><td>4 GB</td><td>80 GB</td><td>4 TB</td><td>฿440</td></tr>
-          <tr><td>Business</td><td>6</td><td>8 GB</td><td>160 GB</td><td>6 TB</td><td>฿790</td></tr>
-          <tr><td>Ultra</td><td>8</td><td>12 GB</td><td>240 GB</td><td>8 TB</td><td>฿1150</td></tr>
-          <tr><td>Extreme</td><td>12</td><td>16 GB</td><td>320 GB</td><td>10 TB</td><td>฿1490</td></tr>
+          <tr><td>Basic</td><td>1</td><td>1 GB</td><td>25 GB</td><td>1 TB</td><td>🇸🇬 Singapore</td><td>฿180</td></tr>
+          <tr><td>Standard</td><td>2</td><td>2 GB</td><td>50 GB</td><td>2 TB</td><td>🇯🇵 Tokyo</td><td>฿290</td></tr>
+          <tr><td>Pro</td><td>4</td><td>4 GB</td><td>80 GB</td><td>4 TB</td><td>🇺🇸 Los Angeles</td><td>฿440</td></tr>
+          <tr><td>Business</td><td>6</td><td>8 GB</td><td>160 GB</td><td>6 TB</td><td>🇩🇪 Frankfurt</td><td>฿790</td></tr>
+          <tr><td>Ultra</td><td>8</td><td>12 GB</td><td>240 GB</td><td>8 TB</td><td>🇨🇦 Toronto</td><td>฿1150</td></tr>
+          <tr><td>Extreme</td><td>12</td><td>16 GB</td><td>320 GB</td><td>10 TB</td><td>🇳🇱 Amsterdam</td><td>฿1490</td></tr>
         </tbody>
       </table>
     </div>
@@ -236,12 +242,6 @@
       localStorage.setItem("theme", next);
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const saved = localStorage.getItem("theme");
-      if (saved) document.documentElement.setAttribute("data-theme", saved);
-      document.getElementById("lastCheck").textContent = new Date().toLocaleString();
-    });
-
     function copyWallet() {
       const text = document.getElementById('wallet').innerText;
       navigator.clipboard.writeText(text).then(() => {
@@ -250,7 +250,7 @@
     }
 
     function orderPlan(plan) {
-      const telegram = "https://t.me/YourTelegramUsername"; // Change this
+      const telegram = "https://t.me/YourTelegramUsername"; // Replace with your username
       const message = encodeURIComponent(`Hi, I want to order the "${plan}" VPS plan.`);
       window.open(`${telegram}?text=${message}`, "_blank");
     }
