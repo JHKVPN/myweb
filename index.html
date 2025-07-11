@@ -149,54 +149,13 @@
   </header>
 
   <section class="plans">
-    <div class="card">
-      <h2>Basic</h2>
-      <p>1 CPU • 1 GB RAM</p>
-      <p>25 GB SSD • Unlimited Bandwidth</p>
-      <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿180</p>
-      <button class="buy-btn" onclick="orderPlan('Basic')">Buy Now</button>
-    </div>
-    <div class="card">
-      <h2>Standard</h2>
-      <p>2 CPU • 2 GB RAM</p>
-      <p>50 GB SSD • Unlimited Bandwidth</p>
-      <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿290</p>
-      <button class="buy-btn" onclick="orderPlan('Standard')">Buy Now</button>
-    </div>
-    <div class="card">
-      <h2>Pro</h2>
-      <p>4 CPU • 4 GB RAM</p>
-      <p>80 GB SSD • Unlimited Bandwidth</p>
-      <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿440</p>
-      <button class="buy-btn" onclick="orderPlan('Pro')">Buy Now</button>
-    </div>
-    <div class="card">
-      <h2>Business</h2>
-      <p>6 CPU • 8 GB RAM</p>
-      <p>160 GB SSD • Unlimited Bandwidth</p>
-      <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿790</p>
-      <button class="buy-btn" onclick="orderPlan('Business')">Buy Now</button>
-    </div>
-    <div class="card">
-      <h2>Ultra</h2>
-      <p>8 CPU • 12 GB RAM</p>
-      <p>240 GB SSD • Unlimited Bandwidth</p>
-      <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿1150</p>
-      <button class="buy-btn" onclick="orderPlan('Ultra')">Buy Now</button>
-    </div>
-    <div class="card">
-      <h2>Extreme</h2>
-      <p>12 CPU • 16 GB RAM</p>
-      <p>320 GB SSD • Unlimited Bandwidth</p>
-      <p>📍 🇹🇭 Thailand</p>
-      <p class="price">฿1490</p>
-      <button class="buy-btn" onclick="orderPlan('Extreme')">Buy Now</button>
-    </div>
+    <div class="card"><h2>Basic</h2><p>1 CPU • 1 GB RAM</p><p>25 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿180</p><button class="buy-btn" onclick="orderPlan('Basic')">Buy Now</button></div>
+    <div class="card"><h2>Standard</h2><p>2 CPU • 2 GB RAM</p><p>50 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿290</p><button class="buy-btn" onclick="orderPlan('Standard')">Buy Now</button></div>
+    <div class="card"><h2>Pro</h2><p>4 CPU • 4 GB RAM</p><p>80 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿440</p><button class="buy-btn" onclick="orderPlan('Pro')">Buy Now</button></div>
+    <div class="card"><h2>Business</h2><p>6 CPU • 8 GB RAM</p><p>160 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿790</p><button class="buy-btn" onclick="orderPlan('Business')">Buy Now</button></div>
+    <div class="card"><h2>Ultra</h2><p>8 CPU • 12 GB RAM</p><p>240 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿1150</p><button class="buy-btn" onclick="orderPlan('Ultra')">Buy Now</button></div>
+    <div class="card"><h2>Extreme</h2><p>12 CPU • 16 GB RAM</p><p>320 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿1490</p><button class="buy-btn" onclick="orderPlan('Extreme')">Buy Now</button></div>
+    <div class="card"><h2>Game</h2><p>4 CPU • 6 GB RAM</p><p>100 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿550</p><button class="buy-btn" onclick="orderPlan('Game')">Buy Now</button></div>
   </section>
 
   <div class="telegram">
@@ -205,11 +164,17 @@
   </div>
 
   <div class="payment">
-    <h3>💳 Thai Payment - TrueMoney Wallet</h3>
+    <h3>💳 Binance Payment (USDT - TRC20)</h3>
+    <p>Wallet Address:</p>
+    <p><strong id="wallet">TXZ1EXAMPLEYOURWALLETADDRESS</strong> <button onclick="copyWallet()">📋 Copy</button></p>
+    <img src="https://yourdomain.com/images/binance-qr.png" alt="Binance QR">
+    <p>Send payment and confirm via Telegram</p>
+  </div>
+
+  <div class="payment">
+    <h3>📱 TrueMoney Wallet</h3>
     <p>Wallet Number:</p>
-    <p><strong id="wallet">0987654321</strong> 
-      <button onclick="copyWallet()">📋 Copy</button>
-    </p>
+    <p><strong id="truemoney">0987654321</strong> <button onclick="copyTrueMoney()">📋 Copy</button></p>
     <img src="https://yourdomain.com/images/truemoney-qr.png" alt="TrueMoney QR">
     <p>Send payment and confirm via Telegram</p>
   </div>
@@ -228,6 +193,7 @@
           <tr><td>Business</td><td>6</td><td>8 GB</td><td>160 GB</td><td>Unlimited</td><td>🇹🇭 Thailand</td><td>฿790</td></tr>
           <tr><td>Ultra</td><td>8</td><td>12 GB</td><td>240 GB</td><td>Unlimited</td><td>🇹🇭 Thailand</td><td>฿1150</td></tr>
           <tr><td>Extreme</td><td>12</td><td>16 GB</td><td>320 GB</td><td>Unlimited</td><td>🇹🇭 Thailand</td><td>฿1490</td></tr>
+          <tr><td>Game</td><td>4</td><td>6 GB</td><td>100 GB</td><td>Unlimited</td><td>🇹🇭 Thailand</td><td>฿550</td></tr>
         </tbody>
       </table>
     </div>
@@ -245,7 +211,14 @@
     function copyWallet() {
       const text = document.getElementById('wallet').innerText;
       navigator.clipboard.writeText(text).then(() => {
-        alert("Wallet number copied!");
+        alert("Wallet address copied!");
+      });
+    }
+
+    function copyTrueMoney() {
+      const text = document.getElementById('truemoney').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("TrueMoney number copied!");
       });
     }
 
