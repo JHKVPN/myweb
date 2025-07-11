@@ -3,251 +3,214 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>VPS & Game Hosting Plans</title>
+  <title>VPS & Game Plans</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap">
   <style>
     :root {
-      --green: #00ff00;
-      --bg-dark: #000;
-      --bg-light: #f9f9f9;
-      --text-dark: #000;
-      --text-light: #fff;
-      --card-dark: #111;
-      --card-light: #fff;
-      --glass-bg: rgba(255, 255, 255, 0.1);
-      --border-dark: #444;
-      --border-light: #ddd;
+      --bg-color-light: #f0f0f0;
+      --text-color-light: #000;
+      --bg-color-dark: #0d0d0d;
+      --text-color-dark: #fff;
+      --green-led: #00ff00;
     }
-
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      transition: background-color 0.3s, color 0.3s;
+      background-color: var(--bg-color-light);
+      color: var(--text-color-light);
+      transition: all 0.3s ease;
     }
-
     body.dark {
-      background-color: var(--bg-dark);
-      color: var(--green);
+      background-color: var(--bg-color-dark);
+      color: var(--text-color-dark);
     }
-
-    body.light {
-      background-color: var(--bg-light);
-      color: var(--text-dark);
-    }
-
-    header {
-      text-align: center;
+    header, footer {
       padding: 1rem;
+      text-align: center;
     }
-
-    .running-text {
-      background-color: #000;
-      color: var(--green);
-      font-family: monospace;
-      font-weight: bold;
-      border: 2px solid var(--green);
-      padding: 10px;
+    .running-box {
       width: 100%;
+      background: #000;
+      color: var(--green-led);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1rem;
       overflow: hidden;
+      white-space: nowrap;
       box-sizing: border-box;
     }
-
-    .marquee {
+    .scrolling-text {
       display: inline-block;
-      white-space: nowrap;
-      animation: scroll-left 15s linear infinite;
+      padding-left: 100%;
+      animation: scroll-left 20s linear infinite;
     }
-
     @keyframes scroll-left {
-      0% { transform: translateX(100%); }
+      0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
-
-    .lang-switch, .theme-toggle {
-      margin: 10px;
+    .toggle-mode {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: #888;
+      color: #fff;
+      border: none;
+      padding: 0.4rem 0.7rem;
+      border-radius: 6px;
       cursor: pointer;
     }
-
+    .language-switch {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+    }
+    .language-switch button {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      margin: 0 2px;
+      cursor: pointer;
+    }
     .plans {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 2rem;
-      max-width: 1200px;
-      margin: auto;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
     }
-
     .plan {
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
-      background-color: var(--card-dark);
-      border: 1px solid var(--border-dark);
+      background: rgba(255,255,255,0.9);
+      padding: 1rem;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
     }
-
-    body.light .plan {
-      background-color: var(--card-light);
-      border: 1px solid var(--border-light);
-      color: var(--text-dark);
+    body.dark .plan {
+      background: #1a1a1a;
+      color: #eee;
     }
-
     .plan:hover {
       transform: translateY(-5px);
     }
-
-    .plan h3 {
-      margin-top: 0;
-      font-size: 20px;
-    }
-
-    .plan p {
-      margin: 6px 0;
-      font-size: 14px;
-    }
-
     .buy-button {
       display: inline-block;
-      margin-top: 12px;
-      padding: 10px 18px;
-      background: var(--green);
-      color: black;
-      border-radius: 8px;
-      font-weight: bold;
+      margin-top: 10px;
+      padding: 10px 16px;
+      background-color: #28a745;
+      color: white;
+      border-radius: 6px;
       text-decoration: none;
-      font-size: 14px;
     }
-
     footer {
-      text-align: center;
-      padding: 2rem 1rem;
+      background-color: #111;
+      color: #ccc;
+      font-size: 0.9rem;
     }
-
-    footer h2 {
-      margin-bottom: 1rem;
+    .footer-section {
+      margin-top: 20px;
     }
-
-    footer img {
-      height: 40px;
+    .payment-icons img {
+      height: 32px;
       margin: 0 10px;
     }
-
-    .telegram-box {
-      margin-top: 20px;
-      background: var(--glass-bg);
-      padding: 20px;
-      border-radius: 12px;
-      display: inline-block;
-      border: 1px solid #ccc;
-    }
-
-    .telegram-link {
-      background: #229ED9;
+    .messenger-button {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      background: #0084FF;
       color: white;
-      padding: 10px 24px;
-      border-radius: 30px;
+      padding: 12px;
+      border-radius: 50%;
+      font-size: 24px;
       text-decoration: none;
-      font-weight: bold;
-      display: inline-block;
-      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="lang-switch">
-      🌐 <button onclick="switchLang('en')">🇺🇸</button>
-      <button onclick="switchLang('th')">🇹🇭</button>
-      <button onclick="switchLang('mm')">🇲🇲</button>
+  <div class="language-switch">
+    <button onclick="setLanguage('en')">🇺🇸</button>
+    <button onclick="setLanguage('th')">🇹🇭</button>
+    <button onclick="setLanguage('mm')">🇲🇲</button>
+  </div>
+  <button class="toggle-mode" onclick="toggleMode()">🌓</button>
+  
+  <div class="running-box">
+    <div class="scrolling-text">
+      💻 PROMO! High Performance VPS 🌐 Secure + Fast 🌟 Game Hosting Ready! ORDER NOW! 💸 BINANCE PAY & TRUEMONEY Accepted! 🇹🇭 🇲🇲
     </div>
-    <div class="theme-toggle">
-      <button onclick="toggleTheme()">🌓 Toggle Theme</button>
-    </div>
-    <div class="running-text">
-      <div class="marquee">🔥 PROMO: Get 20% off your first VPS order this month! 🔥</div>
-    </div>
-  </header>
+  </div>
 
-  <!-- VPS Plans -->
   <section class="plans">
     <div class="plan">
       <h3>🇹🇭 Basic VPS</h3>
       <p>✔️ 1 vCPU / 1GB RAM</p>
       <p>✔️ 20GB SSD / 1TB Bandwidth</p>
-      <a href="#" class="buy-button">Buy Now</a>
+      <a href="https://t.me/Pussy1990?text=I%20want%20to%20buy%20Basic%20VPS" class="buy-button" target="_blank">Buy Now</a>
     </div>
     <div class="plan">
       <h3>🇲🇲 Pro VPS</h3>
       <p>✔️ 2 vCPU / 4GB RAM</p>
       <p>✔️ 60GB SSD / 3TB Bandwidth</p>
-      <a href="#" class="buy-button">Buy Now</a>
+      <a href="https://t.me/Pussy1990?text=I%20want%20to%20buy%20Pro%20VPS" class="buy-button" target="_blank">Buy Now</a>
     </div>
     <div class="plan">
       <h3>🇹🇭 Ultra VPS</h3>
       <p>✔️ 4 vCPU / 8GB RAM</p>
       <p>✔️ 120GB SSD / 5TB Bandwidth</p>
-      <a href="#" class="buy-button">Buy Now</a>
+      <a href="https://t.me/Pussy1990?text=I%20want%20to%20buy%20Ultra%20VPS" class="buy-button" target="_blank">Buy Now</a>
     </div>
   </section>
 
-  <!-- Game Plans -->
   <section class="plans">
     <div class="plan">
       <h3>🎮 Minecraft Server</h3>
       <p>✔️ 2 vCPU / 4GB RAM</p>
       <p>✔️ Instant Setup / DDoS Protected</p>
-      <a href="#" class="buy-button">Buy Now</a>
+      <a href="https://t.me/Pussy1990?text=I%20want%20to%20buy%20Minecraft%20Server" class="buy-button" target="_blank">Buy Now</a>
     </div>
     <div class="plan">
       <h3>🎮 FiveM Server</h3>
       <p>✔️ 4 vCPU / 6GB RAM</p>
       <p>✔️ Mod Support / High Performance</p>
-      <a href="#" class="buy-button">Buy Now</a>
+      <a href="https://t.me/Pussy1990?text=I%20want%20to%20buy%20FiveM%20Server" class="buy-button" target="_blank">Buy Now</a>
     </div>
     <div class="plan">
       <h3>🎮 ARK Survival</h3>
       <p>✔️ 4 vCPU / 10GB RAM</p>
       <p>✔️ FTP Access / Daily Backup</p>
-      <a href="#" class="buy-button">Buy Now</a>
+      <a href="https://t.me/Pussy1990?text=I%20want%20to%20buy%20ARK%20Survival" class="buy-button" target="_blank">Buy Now</a>
     </div>
   </section>
 
-  <!-- Payment & Telegram -->
   <footer>
-    <h2>💳 Payment Methods</h2>
-    <div>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/TrueMoney_Wallet_logo.svg" alt="TrueMoney" />
-      <img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" alt="Binance Pay" />
-      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135706.png" alt="Bank Transfer" />
+    <div class="footer-section">
+      <strong>Accepted Payment Methods:</strong><br />
+      <div class="payment-icons">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/TrueMoney_Logo.svg/2560px-TrueMoney_Logo.svg.png" alt="TrueMoney" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Binance_Logo.png/600px-Binance_Logo.png" alt="Binance Pay" />
+      </div>
     </div>
-
-    <div class="telegram-box">
-      <h3>📲 Order via Telegram</h3>
-      <p>Message us directly to place your order.</p>
-      <a href="https://t.me/Pussy1990" class="telegram-link" target="_blank">💬 Order Now</a>
+    <div class="footer-section">
+      📩 Contact us via <a href="https://t.me/Pussy1990" target="_blank">Telegram</a> anytime.
     </div>
+    <p>© 2025 VPS Hosting Services. All rights reserved.</p>
   </footer>
 
+  <a href="https://m.me/yourpage" class="messenger-button" title="Chat on Messenger" target="_blank">💬</a>
+
   <script>
-    function toggleTheme() {
-      const body = document.body;
-      if (body.classList.contains('light')) {
-        body.classList.remove('light');
-        body.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        body.classList.remove('dark');
-        body.classList.add('light');
-        localStorage.setItem('theme', 'light');
+    const toggleMode = () => {
+      document.body.classList.toggle("dark");
+      localStorage.setItem("mode", document.body.classList.contains("dark") ? "dark" : "light");
+    };
+    const setLanguage = (lang) => {
+      localStorage.setItem("lang", lang);
+      // Future language content switch logic here
+    };
+    window.onload = () => {
+      if (localStorage.getItem("mode") === "dark") {
+        document.body.classList.add("dark");
       }
-    }
-
-    function switchLang(lang) {
-      alert("Language switched to: " + lang);
-    }
-
-    // Apply saved theme
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    document.body.classList.add(savedTheme);
+    };
   </script>
 </body>
 </html>
