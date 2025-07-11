@@ -1,216 +1,335 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>VPS & Game Plans</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap">
+  <title>VPS Plans</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-color-light: #f0f0f0;
-      --text-color-light: #000;
-      --bg-color-dark: #0d0d0d;
-      --text-color-dark: #fff;
-      --green-led: #00ff00;
+      --bg-light: #ecf0f3;
+      --bg-dark: #121212;
+      --text-light: #000;
+      --text-dark: #fff;
+      --glass-bg: rgba(255, 255, 255, 0.2);
+      --card-border: rgba(255, 255, 255, 0.3);
+      --primary: #1abc9c;
+      --highlight: #e67e22;
+    }
+    [data-theme="light"] {
+      --bg-color: var(--bg-light);
+      --text-color: var(--text-light);
+    }
+    [data-theme="dark"] {
+      --bg-color: var(--bg-dark);
+      --text-color: var(--text-dark);
     }
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: var(--bg-color-light);
-      color: var(--text-color-light);
-      transition: all 0.3s ease;
+      background: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Inter', sans-serif;
+      padding: 20px;
+      transition: background 0.3s, color 0.3s;
+      backdrop-filter: blur(5px);
     }
-    body.dark {
-      background-color: var(--bg-color-dark);
-      color: var(--text-color-dark);
-    }
-    header, footer {
-      padding: 1rem;
+    header {
       text-align: center;
+      margin-bottom: 10px;
     }
-    .running-box {
-      width: 100%;
-      background: #000;
-      color: var(--green-led);
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 1rem;
-      overflow: hidden;
-      white-space: nowrap;
-      box-sizing: border-box;
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 5px;
     }
-    .scrolling-text {
-      display: inline-block;
-      padding-left: 100%;
-      animation: scroll-left 20s linear infinite;
-    }
-    @keyframes scroll-left {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
-    }
-    .toggle-mode {
+
+    .toggle-theme, .lang-switch {
       position: fixed;
-      top: 10px;
-      right: 10px;
-      background: #888;
+      top: 20px;
+      z-index: 9999;
+      padding: 8px 16px;
+      background: var(--primary);
       color: #fff;
       border: none;
-      padding: 0.4rem 0.7rem;
-      border-radius: 6px;
+      border-radius: 30px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       cursor: pointer;
     }
-    .language-switch {
-      position: fixed;
-      top: 10px;
-      left: 10px;
+    .toggle-theme { right: 20px; }
+    .lang-switch { left: 20px; }
+
+    .running-text-box {
+      background: #000;
+      border-radius: 8px;
+      padding: 8px 0;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      overflow: hidden;
+      box-shadow: 0 0 8px #00ff00;
+      position: relative;
+      height: 26px;
     }
-    .language-switch button {
-      background: none;
-      border: none;
-      font-size: 1.2rem;
-      margin: 0 2px;
-      cursor: pointer;
+    .running-text-wrapper {
+      display: flex;
+      width: max-content;
+      animation: scrollLoop 25s linear infinite;
     }
+    .running-text {
+      white-space: nowrap;
+      color: #00ff00;
+      font-family: 'Courier New', monospace;
+      font-size: 16px;
+      padding-right: 100px;
+    }
+    @keyframes scrollLoop {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
     .plans {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1rem;
-      padding: 1rem;
-    }
-    .plan {
-      background: rgba(255,255,255,0.9);
-      padding: 1rem;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-    }
-    body.dark .plan {
-      background: #1a1a1a;
-      color: #eee;
-    }
-    .plan:hover {
-      transform: translateY(-5px);
-    }
-    .buy-button {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 16px;
-      background-color: #28a745;
-      color: white;
-      border-radius: 6px;
-      text-decoration: none;
-    }
-    footer {
-      background-color: #111;
-      color: #ccc;
-      font-size: 0.9rem;
-    }
-    .footer-section {
+      gap: 24px;
       margin-top: 20px;
     }
-    .payment-icons img {
-      height: 32px;
-      margin: 0 10px;
+    .card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      padding: 24px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      border: 1px solid var(--card-border);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .messenger-button {
-      position: fixed;
-      bottom: 15px;
-      right: 15px;
-      background: #0084FF;
-      color: white;
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+    }
+    .card h2 {
+      color: var(--primary);
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+    .card p {
+      font-size: 0.95rem;
+      margin: 5px 0;
+    }
+    .price {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: var(--highlight);
+      margin-top: 10px;
+    }
+    .buy-btn {
+      margin-top: 14px;
+      width: 100%;
       padding: 12px;
-      border-radius: 50%;
-      font-size: 24px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    .buy-btn:hover {
+      background: #16a085;
+    }
+    .telegram, .payment, table {
+      max-width: 700px;
+      margin: 40px auto;
+      background: var(--glass-bg);
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      border: 1px solid var(--card-border);
+    }
+    .telegram a {
+      background: #0088cc;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
       text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+    }
+    .telegram a:hover {
+      background: #0070aa;
+    }
+    .payment img {
+      width: 160px;
+      margin-top: 12px;
+    }
+    .payment-method {
+      margin-bottom: 30px;
+    }
+    .payment h3 {
+      margin-bottom: 5px;
+    }
+    .promo {
+      background: #f39c12;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-weight: bold;
+      border-radius: 8px;
+      margin-top: 60px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
     }
   </style>
 </head>
 <body>
-  <div class="language-switch">
-    <button onclick="setLanguage('en')">🇺🇸</button>
-    <button onclick="setLanguage('th')">🇹🇭</button>
-    <button onclick="setLanguage('mm')">🇲🇲</button>
-  </div>
-  <button class="toggle-mode" onclick="toggleMode()">🌓</button>
-  
-  <div class="running-box">
-    <div class="scrolling-text">
-      💻 PROMO! High Performance VPS 🌐 Secure + Fast 🌟 Game Hosting Ready! ORDER NOW! 💸 BINANCE PAY & TRUEMONEY Accepted! 🇹🇭 🇲🇲
-    </div>
-  </div>
+  <button class="lang-switch" onclick="switchLanguage()">🌐</button>
+  <button class="toggle-theme" onclick="toggleTheme()">🌓</button>
 
-  <section class="plans">
-    <div class="plan">
-      <h3>🇹🇭 Basic VPS</h3>
-      <p>✔️ 1 vCPU / 1GB RAM</p>
-      <p>✔️ 20GB SSD / 1TB Bandwidth</p>
-      <a href="https://t.me/Pussy1990?text=I%20want%20to%20buy%20Basic%20VPS" class="buy-button" target="_blank">Buy Now</a>
-    </div>
-    <div class="plan">
-      <h3>🇲🇲 Pro VPS</h3>
-      <p>✔️ 2 vCPU / 4GB RAM</p>
-      <p>✔️ 60GB SSD / 3TB Bandwidth</p>
-      <a href="https://t.me/Pussy1990?text=I%20want%20to%20buy%20Pro%20VPS" class="buy-button" target="_blank">Buy Now</a>
-    </div>
-    <div class="plan">
-      <h3>🇹🇭 Ultra VPS</h3>
-      <p>✔️ 4 vCPU / 8GB RAM</p>
-      <p>✔️ 120GB SSD / 5TB Bandwidth</p>
-      <a href="https://t.me/Pussy1990?text=I%20want%20to%20buy%20Ultra%20VPS" class="buy-button" target="_blank">Buy Now</a>
-    </div>
-  </section>
+  <div class="promo">🎉 Get 10% OFF with code <u>JULY10</u> – Limited Time!</div>
 
-  <section class="plans">
-    <div class="plan">
-      <h3>🎮 Minecraft Server</h3>
-      <p>✔️ 2 vCPU / 4GB RAM</p>
-      <p>✔️ Instant Setup / DDoS Protected</p>
-      <a href="https://t.me/Pussy1990?text=I%20want%20to%20buy%20Minecraft%20Server" class="buy-button" target="_blank">Buy Now</a>
-    </div>
-    <div class="plan">
-      <h3>🎮 FiveM Server</h3>
-      <p>✔️ 4 vCPU / 6GB RAM</p>
-      <p>✔️ Mod Support / High Performance</p>
-      <a href="https://t.me/Pussy1990?text=I%20want%20to%20buy%20FiveM%20Server" class="buy-button" target="_blank">Buy Now</a>
-    </div>
-    <div class="plan">
-      <h3>🎮 ARK Survival</h3>
-      <p>✔️ 4 vCPU / 10GB RAM</p>
-      <p>✔️ FTP Access / Daily Backup</p>
-      <a href="https://t.me/Pussy1990?text=I%20want%20to%20buy%20ARK%20Survival" class="buy-button" target="_blank">Buy Now</a>
-    </div>
-  </section>
-
-  <footer>
-    <div class="footer-section">
-      <strong>Accepted Payment Methods:</strong><br />
-      <div class="payment-icons">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/TrueMoney_Logo.svg/2560px-TrueMoney_Logo.svg.png" alt="TrueMoney" />
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Binance_Logo.png/600px-Binance_Logo.png" alt="Binance Pay" />
+  <header>
+    <h1 id="header-title">🔥 Choose Your VPS Plan</h1>
+    <div class="running-text-box">
+      <div class="running-text-wrapper">
+        <div class="running-text">💡 အကောင်းဆုံးနဲ့အတန်ဆုံး VPS Website • Fast Network • 24/7 Uptime • Telegram Support Available • Accepting Binance Pay & TrueMoney Wallet</div>
+        <div class="running-text">💡 အကောင်းဆုံးနဲ့အတန်ဆုံး VPS Website • Fast Network • 24/7 Uptime • Telegram Support Available • Accepting Binance Pay & TrueMoney Wallet</div>
       </div>
     </div>
-    <div class="footer-section">
-      📩 Contact us via <a href="https://t.me/Pussy1990" target="_blank">Telegram</a> anytime.
-    </div>
-    <p>© 2025 VPS Hosting Services. All rights reserved.</p>
-  </footer>
+  </header>
 
-  <a href="https://m.me/yourpage" class="messenger-button" title="Chat on Messenger" target="_blank">💬</a>
+  <section class="plans" id="plans">
+    <!-- Plans will be rendered by JavaScript -->
+  </section>
+
+  <div class="telegram">
+    <a href="https://t.me/Pussy1990" target="_blank">📩 <span data-lang="orderTelegram">Order via Telegram</span></a>
+    <p><span data-lang="contactHours">💬 တိုက်ရိုက်ဆက်သွယ်လို့ရမယ့်အချိန် (8AM - 8PM)</span></p>
+  </div>
+
+  <div class="payment">
+    <div class="payment-method">
+      <h3>💳 TrueMoney Wallet</h3>
+      <p><span data-lang="truemoney">Number:</span> <strong>095-3244-179</strong></p>
+      <p><span data-lang="scanQR">OR scan QR below:</span></p>
+      <img src="https://yourdomain.com/truemoney-qr.png" alt="TrueMoney QR">
+    </div>
+    <div class="payment-method">
+      <h3>🪙 Binance Pay</h3>
+      <p><span data-lang="binance">Binance ID:</span> <strong>219766442</strong></p>
+      <p><span data-lang="scanQR">OR scan QR below:</span></p>
+      <img src="https://yourdomain.com/binancepay-qr.png" alt="Binance Pay QR">
+    </div>
+  </div>
 
   <script>
-    const toggleMode = () => {
-      document.body.classList.toggle("dark");
-      localStorage.setItem("mode", document.body.classList.contains("dark") ? "dark" : "light");
-    };
-    const setLanguage = (lang) => {
-      localStorage.setItem("lang", lang);
-      // Future language content switch logic here
-    };
-    window.onload = () => {
-      if (localStorage.getItem("mode") === "dark") {
-        document.body.classList.add("dark");
+    const languages = {
+      en: {
+        title: "🔥 Choose Your VPS Plan",
+        orderTelegram: "Order via Telegram",
+        contactHours: "💬 Contact Hours: 8AM - 8PM",
+        truemoney: "Number:",
+        binance: "Binance ID:",
+        scanQR: "OR scan QR below:",
+        plans: [
+          { name: "Basic", spec: "1 CPU • 1 GB RAM", storage: "25 GB SSD • Unlimited Bandwidth", price: "฿300" },
+          { name: "Standard", spec: "2 CPU • 2 GB RAM", storage: "50 GB SSD • Unlimited Bandwidth", price: "฿380" },
+          { name: "Pro", spec: "4 CPU • 4 GB RAM", storage: "80 GB SSD • Unlimited Bandwidth", price: "฿490" },
+          { name: "Business", spec: "6 CPU • 8 GB RAM", storage: "160 GB SSD • Unlimited Bandwidth", price: "฿790" },
+          { name: "Ultra", spec: "8 CPU • 12 GB RAM", storage: "240 GB SSD • Unlimited Bandwidth", price: "฿1150" },
+          { name: "Extreme", spec: "12 CPU • 16 GB RAM", storage: "320 GB SSD • Unlimited Bandwidth", price: "฿1490" },
+          { name: "Game Plan", spec: "6 CPU • 12 GB RAM", storage: "100 GB SSD • Unlimited Bandwidth", price: "฿690" },
+        ]
+      },
+      th: {
+        title: "🔥 เลือกแผน VPS ของคุณ",
+        orderTelegram: "สั่งซื้อผ่าน Telegram",
+        contactHours: "💬 ติดต่อได้เวลา 8AM - 8PM",
+        truemoney: "หมายเลข:",
+        binance: "รหัส Binance:",
+        scanQR: "หรือสแกน QR ด้านล่าง:",
+        plans: [
+          { name: "Basic", spec: "1 CPU • 1 GB RAM", storage: "25 GB SSD • ไม่จำกัดแบนด์วิดท์", price: "฿300" },
+          { name: "Standard", spec: "2 CPU • 2 GB RAM", storage: "50 GB SSD • ไม่จำกัดแบนด์วิดท์", price: "฿380" },
+          { name: "Pro", spec: "4 CPU • 4 GB RAM", storage: "80 GB SSD • ไม่จำกัดแบนด์วิดท์", price: "฿490" },
+          { name: "Business", spec: "6 CPU • 8 GB RAM", storage: "160 GB SSD • ไม่จำกัดแบนด์วิดท์", price: "฿790" },
+          { name: "Ultra", spec: "8 CPU • 12 GB RAM", storage: "240 GB SSD • ไม่จำกัดแบนด์วิดท์", price: "฿1150" },
+          { name: "Extreme", spec: "12 CPU • 16 GB RAM", storage: "320 GB SSD • ไม่จำกัดแบนด์วิดท์", price: "฿1490" },
+          { name: "Game Plan", spec: "6 CPU • 12 GB RAM", storage: "100 GB SSD • ไม่จำกัดแบนด์วิดท์", price: "฿690" },
+        ]
+      },
+      mm: {
+        title: "🔥 မင်းအတွက် VPS Plan ရွေးပါ",
+        orderTelegram: "Telegram နဲ့ မှာယူပါ",
+        contactHours: "💬 ဆက်သွယ်နိုင်ချိန် (မနက် 8 - ည 8)",
+        truemoney: "နံပါတ်:",
+        binance: "Binance ID:",
+        scanQR: "သို့မဟုတ် QR ကို စကန်လုပ်ပါ:",
+        plans: [
+          { name: "Basic", spec: "1 CPU • 1 GB RAM", storage: "25 GB SSD • အမေရိကန်မည့်သုံးနိုင်", price: "฿300" },
+          { name: "Standard", spec: "2 CPU • 2 GB RAM", storage: "50 GB SSD • အမေရိကန်မည့်သုံးနိုင်", price: "฿380" },
+          { name: "Pro", spec: "4 CPU • 4 GB RAM", storage: "80 GB SSD • အမေရိကန်မည့်သုံးနိုင်", price: "฿490" },
+          { name: "Business", spec: "6 CPU • 8 GB RAM", storage: "160 GB SSD • အမေရိကန်မည့်သုံးနိုင်", price: "฿790" },
+          { name: "Ultra", spec: "8 CPU • 12 GB RAM", storage: "240 GB SSD • အမေရိကန်မည့်သုံးနိုင်", price: "฿1150" },
+          { name: "Extreme", spec: "12 CPU • 16 GB RAM", storage: "320 GB SSD • အမေရိကန်မည့်သုံးနိုင်", price: "฿1490" },
+          { name: "Game Plan", spec: "6 CPU • 12 GB RAM", storage: "100 GB SSD • အမေရိကန်မည့်သုံးနိုင်", price: "฿690" },
+        ]
       }
     };
+
+    let currentLang = localStorage.getItem("lang") || "en";
+    function switchLanguage() {
+      const keys = Object.keys(languages);
+      const next = keys[(keys.indexOf(currentLang) + 1) % keys.length];
+      localStorage.setItem("lang", next);
+      currentLang = next;
+      renderLanguage();
+    }
+
+    function renderLanguage() {
+      const lang = languages[currentLang];
+      document.getElementById("header-title").textContent = lang.title;
+      document.querySelector('[data-lang="orderTelegram"]').textContent = lang.orderTelegram;
+      document.querySelector('[data-lang="contactHours"]').textContent = lang.contactHours;
+      document.querySelector('[data-lang="truemoney"]').textContent = lang.truemoney;
+      document.querySelector('[data-lang="binance"]').textContent = lang.binance;
+      document.querySelectorAll('[data-lang="scanQR"]').forEach(e => e.textContent = lang.scanQR);
+
+      const plansContainer = document.getElementById("plans");
+      plansContainer.innerHTML = "";
+      lang.plans.forEach(plan => {
+        const div = document.createElement("div");
+        div.className = "card";
+        div.innerHTML = `
+          <h2>${plan.name}</h2>
+          <p>${plan.spec}</p>
+          <p>${plan.storage}</p>
+          <p>📍 🇹🇭 Thailand</p>
+          <p class="price">${plan.price}</p>
+          <button class="buy-btn" onclick="orderPlan('${plan.name}')">Buy Now</button>
+        `;
+        plansContainer.appendChild(div);
+      });
+    }
+
+    function orderPlan(plan) {
+      const telegram = "https://t.me/Pussy1990";
+      const message = encodeURIComponent(`Hi, I want to order the "${plan}" VPS plan.`);
+      window.open(`${telegram}?text=${message}`, "_blank");
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute("data-theme");
+      const next = current === "light" ? "dark" : "light";
+      html.setAttribute("data-theme", next);
+      localStorage.setItem("theme", next);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.documentElement.setAttribute("data-theme", localStorage.getItem("theme") || "light");
+      currentLang = localStorage.getItem("lang") || "en";
+      renderLanguage();
+    });
   </script>
 </body>
 </html>
