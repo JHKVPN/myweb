@@ -44,6 +44,7 @@
     .toggle-theme, .lang-switch {
       position: absolute;
       top: 20px;
+      cursor: pointer;
       padding: 8px 16px;
       background: var(--primary);
       color: #fff;
@@ -51,10 +52,13 @@
       border-radius: 30px;
       font-weight: bold;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      cursor: pointer;
     }
-    .toggle-theme { right: 20px; }
-    .lang-switch { left: 20px; }
+    .toggle-theme {
+      right: 20px;
+    }
+    .lang-switch {
+      left: 20px;
+    }
 
     .running-text-box {
       background: #000;
@@ -134,7 +138,6 @@
     .buy-btn:hover {
       background: #16a085;
     }
-
     .telegram, .payment {
       max-width: 700px;
       margin: 40px auto;
@@ -180,10 +183,14 @@
 <body>
   <div class="promo">🎉 Get 10% OFF with code <u>JULY10</u> – Limited Time!</div>
   <button class="toggle-theme" onclick="toggleTheme()">🌓 Mode</button>
-  <button class="lang-switch" onclick="switchLang()">🌐 Language</button>
+  <select class="lang-switch" onchange="changeLanguage(this.value)">
+    <option value="en">🇺🇸 English</option>
+    <option value="mm">🇲🇲 မြန်မာ</option>
+    <option value="th">🇹🇭 ไทย</option>
+  </select>
 
   <header>
-    <h1>🔥 Choose Your VPS Plan</h1>
+    <h1 data-i18n="choosePlan">🔥 Choose Your VPS Plan</h1>
     <div class="running-text-box">
       <div class="running-text-wrapper">
         <div class="running-text">💡 အကောင်းဆုံးနဲ့အတန်ဆုံး VPS Website • Fast Network • 24/7 Uptime • Telegram Support Available • Accepting Binance Pay & TrueMoney Wallet</div>
@@ -192,19 +199,13 @@
     </div>
   </header>
 
-  <section class="plans">
-    <div class="card"><h2>Basic</h2><p>1 CPU • 1 GB RAM</p><p>25 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿300</p><button class="buy-btn" onclick="orderPlan('Basic')">Buy Now</button></div>
-    <div class="card"><h2>Standard</h2><p>2 CPU • 2 GB RAM</p><p>50 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿380</p><button class="buy-btn" onclick="orderPlan('Standard')">Buy Now</button></div>
-    <div class="card"><h2>Pro</h2><p>4 CPU • 4 GB RAM</p><p>80 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿490</p><button class="buy-btn" onclick="orderPlan('Pro')">Buy Now</button></div>
-    <div class="card"><h2>Business</h2><p>6 CPU • 8 GB RAM</p><p>160 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿790</p><button class="buy-btn" onclick="orderPlan('Business')">Buy Now</button></div>
-    <div class="card"><h2>Ultra</h2><p>8 CPU • 12 GB RAM</p><p>240 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿1150</p><button class="buy-btn" onclick="orderPlan('Ultra')">Buy Now</button></div>
-    <div class="card"><h2>Extreme</h2><p>12 CPU • 16 GB RAM</p><p>320 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿1490</p><button class="buy-btn" onclick="orderPlan('Extreme')">Buy Now</button></div>
-    <div class="card"><h2>Game Plan</h2><p>6 CPU • 12 GB RAM</p><p>100 GB SSD • Unlimited Bandwidth</p><p>📍 🇹🇭 Thailand</p><p class="price">฿690</p><button class="buy-btn" onclick="orderPlan('Game Plan')">Buy Now</button></div>
+  <section class="plans" id="plans-section">
+    <!-- Plan cards will be inserted here dynamically -->
   </section>
 
   <div class="telegram">
     <a href="https://t.me/Pussy1990" target="_blank">📩 Order via Telegram</a>
-    <p>💬 တိုက်ရိုက်ဆက်သွယ်လို့ရမယ့်အချိန် (8AM - 8PM)</p>
+    <p data-i18n="contactHours">💬 တိုက်ရိုက်ဆက်သွယ်လို့ရမယ့်အချိန် (8AM - 8PM)</p>
   </div>
 
   <div class="payment">
@@ -216,13 +217,63 @@
     </div>
     <div class="payment-method">
       <h3>🪙 Binance Pay</h3>
-      <p>Binace ID: <strong>219766442</strong></p>
+      <p>Binance ID: <strong>219766442</strong></p>
       <p>OR scan QR below:</p>
       <img src="https://yourdomain.com/binancepay-qr.png" alt="Binance Pay QR">
     </div>
   </div>
 
   <script>
+    const translations = {
+      en: {
+        choosePlan: "🔥 Choose Your VPS Plan",
+        contactHours: "💬 Contact hours (8AM - 8PM)"
+      },
+      mm: {
+        choosePlan: "🔥 သင့် VPS Plan ကို ရွေးချယ်ပါ",
+        contactHours: "💬 တိုက်ရိုက်ဆက်သွယ်လို့ရမယ့်အချိန် (မနက် ၈ - ည ၈)"
+      },
+      th: {
+        choosePlan: "🔥 เลือกแผน VPS ของคุณ",
+        contactHours: "💬 เวลาทำการติดต่อ (8AM - 8PM)"
+      }
+    };
+
+    const plans = [
+      { name: "Basic", cpu: "1 CPU", ram: "1 GB", storage: "25 GB SSD", price: "฿300" },
+      { name: "Standard", cpu: "2 CPU", ram: "2 GB", storage: "50 GB SSD", price: "฿380" },
+      { name: "Pro", cpu: "4 CPU", ram: "4 GB", storage: "80 GB SSD", price: "฿490" },
+      { name: "Business", cpu: "6 CPU", ram: "8 GB", storage: "160 GB SSD", price: "฿790" },
+      { name: "Ultra", cpu: "8 CPU", ram: "12 GB", storage: "240 GB SSD", price: "฿1150" },
+      { name: "Extreme", cpu: "12 CPU", ram: "16 GB", storage: "320 GB SSD", price: "฿1490" },
+      { name: "Game Plan", cpu: "6 CPU", ram: "12 GB", storage: "100 GB SSD", price: "฿690" }
+    ];
+
+    function renderPlans() {
+      const container = document.getElementById("plans-section");
+      container.innerHTML = "";
+      plans.forEach(plan => {
+        container.innerHTML += `
+          <div class="card">
+            <h2>${plan.name}</h2>
+            <p>${plan.cpu} • ${plan.ram}</p>
+            <p>${plan.storage} • Unlimited Bandwidth</p>
+            <p>📍 🇹🇭 Thailand</p>
+            <p class="price">${plan.price}</p>
+            <button class="buy-btn" onclick="orderPlan('${plan.name}')">Buy Now</button>
+          </div>`;
+      });
+    }
+
+    function changeLanguage(lang) {
+      const texts = translations[lang];
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (texts[key]) el.textContent = texts[key];
+      });
+      localStorage.setItem("lang", lang);
+    }
+
     function toggleTheme() {
       const html = document.documentElement;
       const current = html.getAttribute("data-theme");
@@ -237,17 +288,14 @@
       window.open(`${telegram}?text=${message}`, "_blank");
     }
 
-    function switchLang() {
-      const current = document.documentElement.lang;
-      const langs = ["en", "my", "th"];
-      const next = langs[(langs.indexOf(current) + 1) % langs.length];
-      document.documentElement.lang = next;
-      alert("Language switched to: " + next.toUpperCase());
-    }
-
+    // Load saved settings
     document.addEventListener("DOMContentLoaded", () => {
       const savedTheme = localStorage.getItem("theme") || "light";
+      const savedLang = localStorage.getItem("lang") || "en";
       document.documentElement.setAttribute("data-theme", savedTheme);
+      document.querySelector(".lang-switch").value = savedLang;
+      changeLanguage(savedLang);
+      renderPlans();
     });
   </script>
 </body>
