@@ -1,335 +1,191 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>VPS Plans</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title>VPS Plans 🇹🇭</title>
   <style>
-    :root {
-      --bg-light: #ecf0f3;
-      --bg-dark: #121212;
-      --text-light: #000;
-      --text-dark: #fff;
-      --glass-bg: rgba(255, 255, 255, 0.2);
-      --card-border: rgba(255, 255, 255, 0.3);
-      --primary: #1abc9c;
-      --highlight: #e67e22;
-    }
-    [data-theme="light"] {
-      --bg-color: var(--bg-light);
-      --text-color: var(--text-light);
-    }
-    [data-theme="dark"] {
-      --bg-color: var(--bg-dark);
-      --text-color: var(--text-dark);
-    }
     body {
+      background-color: #000;
+      color: #0f0;
+      font-family: monospace;
       margin: 0;
-      background: var(--bg-color);
-      color: var(--text-color);
-      font-family: 'Inter', sans-serif;
-      padding: 20px;
-      transition: background 0.3s, color 0.3s;
-      backdrop-filter: blur(5px);
-    }
-    header {
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 5px;
+      padding: 0;
     }
 
-    .toggle-theme, .lang-switch {
-      position: fixed;
-      top: 20px;
-      z-index: 9999;
-      padding: 8px 16px;
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      border-radius: 30px;
-      font-weight: bold;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      cursor: pointer;
-    }
-    .toggle-theme { right: 20px; }
-    .lang-switch { left: 20px; }
-
-    .running-text-box {
-      background: #000;
-      border-radius: 8px;
-      padding: 8px 0;
-      width: 100%;
+    .container {
       max-width: 800px;
-      margin: 0 auto 30px;
-      overflow: hidden;
-      box-shadow: 0 0 8px #00ff00;
-      position: relative;
-      height: 26px;
-    }
-    .running-text-wrapper {
-      display: flex;
-      width: max-content;
-      animation: scrollLoop 25s linear infinite;
-    }
-    .running-text {
-      white-space: nowrap;
-      color: #00ff00;
-      font-family: 'Courier New', monospace;
-      font-size: 16px;
-      padding-right: 100px;
-    }
-    @keyframes scrollLoop {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      margin: auto;
+      padding: 20px;
     }
 
-    .plans {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
+    .led-box {
+      background-color: black;
+      color: #0f0;
+      border: 2px solid #0f0;
+      padding: 10px;
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+
+    .led-text {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll-left 15s linear infinite;
+    }
+
+    @keyframes scroll-left {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    .vps-plans {
       margin-top: 20px;
     }
-    .card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      padding: 24px;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      border: 1px solid var(--card-border);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    .vps-plan {
+      border: 1px solid #0f0;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 15px;
     }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+
+    .faq, .server-status {
+      margin-top: 30px;
+      border: 1px solid #0f0;
+      border-radius: 8px;
+      padding: 10px;
     }
-    .card h2 {
-      color: var(--primary);
-      font-size: 1.3rem;
-      margin-bottom: 10px;
+
+    .faq h2, .server-status h2 {
+      color: #0f0;
     }
-    .card p {
-      font-size: 0.95rem;
-      margin: 5px 0;
+
+    .dark-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: #0f0;
+      color: #000;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
     }
-    .price {
-      font-size: 1.1rem;
-      font-weight: bold;
-      color: var(--highlight);
+
+    .dark-mode {
+      background-color: #111;
+      color: #eee;
+    }
+
+    .dark-mode .led-box {
+      border-color: #0f0;
+      color: #0f0;
+    }
+
+    .footer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .social {
       margin-top: 10px;
     }
-    .buy-btn {
-      margin-top: 14px;
-      width: 100%;
-      padding: 12px;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+
+    .social a {
+      color: #0f0;
+      margin: 0 10px;
+      text-decoration: none;
     }
-    .buy-btn:hover {
-      background: #16a085;
-    }
-    .telegram, .payment, table {
-      max-width: 700px;
-      margin: 40px auto;
-      background: var(--glass-bg);
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      border: 1px solid var(--card-border);
-    }
-    .telegram a {
+
+    .telegram-button {
+      display: block;
+      margin: 20px auto;
       background: #0088cc;
       color: white;
-      padding: 12px 24px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      display: inline-block;
-    }
-    .telegram a:hover {
-      background: #0070aa;
-    }
-    .payment img {
-      width: 160px;
-      margin-top: 12px;
-    }
-    .payment-method {
-      margin-bottom: 30px;
-    }
-    .payment h3 {
-      margin-bottom: 5px;
-    }
-    .promo {
-      background: #f39c12;
-      color: white;
+      padding: 10px 20px;
       text-align: center;
-      padding: 12px;
-      font-weight: bold;
       border-radius: 8px;
-      margin-top: 60px;
-      margin-bottom: 16px;
-      position: relative;
-      z-index: 1;
+      text-decoration: none;
+      width: fit-content;
     }
   </style>
 </head>
 <body>
-  <button class="lang-switch" onclick="switchLanguage()">🌐</button>
-  <button class="toggle-theme" onclick="toggleTheme()">🌓</button>
+  <div class="dark-toggle" onclick="toggleDarkMode()">🌓 Toggle Dark Mode</div>
+  <div class="container">
 
-  <div class="promo">🎉 Get 10% OFF with code <u>JULY10</u> – Limited Time!</div>
+    <!-- 🎉 LED Promo Banner -->
+    <div class="led-box">
+      <div class="led-text">🔥 PROMO: Get 20% OFF all VPS Plans — Pay with TrueMoney 🇹🇭 or Binance Pay USDT 🔥</div>
+    </div>
 
-  <header>
-    <h1 id="header-title">🔥 Choose Your VPS Plan</h1>
-    <div class="running-text-box">
-      <div class="running-text-wrapper">
-        <div class="running-text">💡 အကောင်းဆုံးနဲ့အတန်ဆုံး VPS Website • Fast Network • 24/7 Uptime • Telegram Support Available • Accepting Binance Pay & TrueMoney Wallet</div>
-        <div class="running-text">💡 အကောင်းဆုံးနဲ့အတန်ဆုံး VPS Website • Fast Network • 24/7 Uptime • Telegram Support Available • Accepting Binance Pay & TrueMoney Wallet</div>
+    <!-- 🧾 VPS Plans -->
+    <div class="vps-plans">
+      <div class="vps-plan">
+        <h3>VPS Plan A</h3>
+        <p>1 vCPU | 1GB RAM | 20GB SSD</p>
+        <p>Price: 100฿/month</p>
+        <p>💳 Payment: TrueMoney 🇹🇭, Binance Pay (USDT)</p>
       </div>
+      <div class="vps-plan">
+        <h3>VPS Plan B</h3>
+        <p>2 vCPU | 2GB RAM | 40GB SSD</p>
+        <p>Price: 200฿/month</p>
+        <p>💳 Payment: TrueMoney 🇹🇭, Binance Pay (USDT)</p>
+      </div>
+      <div class="vps-plan">
+        <h3>VPS Plan C</h3>
+        <p>4 vCPU | 4GB RAM | 80GB SSD</p>
+        <p>Price: 400฿/month</p>
+        <p>💳 Payment: TrueMoney 🇹🇭, Binance Pay (USDT)</p>
+      </div>
+      <p style="text-align:center; color:gray;">We accept: TrueMoney Wallet 🇹🇭 & Binance Pay (USDT)</p>
     </div>
-  </header>
 
-  <section class="plans" id="plans">
-    <!-- Plans will be rendered by JavaScript -->
-  </section>
+    <!-- 📞 Telegram Order Button -->
+    <a class="telegram-button" href="https://t.me/YourTelegramBot" target="_blank">📲 Order via Telegram</a>
 
-  <div class="telegram">
-    <a href="https://t.me/Pussy1990" target="_blank">📩 <span data-lang="orderTelegram">Order via Telegram</span></a>
-    <p><span data-lang="contactHours">💬 တိုက်ရိုက်ဆက်သွယ်လို့ရမယ့်အချိန် (8AM - 8PM)</span></p>
-  </div>
-
-  <div class="payment">
-    <div class="payment-method">
-      <h3>💳 TrueMoney Wallet</h3>
-      <p><span data-lang="truemoney">Number:</span> <strong>095-3244-179</strong></p>
-      <p><span data-lang="scanQR">OR scan QR below:</span></p>
-      <img src="https://yourdomain.com/truemoney-qr.png" alt="TrueMoney QR">
+    <!-- ✅ Server Status -->
+    <div class="server-status">
+      <h2>🔌 Server Status</h2>
+      <p>🟢 All systems operational</p>
     </div>
-    <div class="payment-method">
-      <h3>🪙 Binance Pay</h3>
-      <p><span data-lang="binance">Binance ID:</span> <strong>219766442</strong></p>
-      <p><span data-lang="scanQR">OR scan QR below:</span></p>
-      <img src="https://yourdomain.com/binancepay-qr.png" alt="Binance Pay QR">
+
+    <!-- ❓ FAQ -->
+    <div class="faq">
+      <h2>❓ Frequently Asked Questions</h2>
+      <p><strong>Q: How do I pay?</strong><br>A: You can pay via TrueMoney 🇹🇭 or Binance Pay (USDT).</p>
+      <p><strong>Q: How long does setup take?</strong><br>A: VPS setup is usually completed within 5 minutes after payment confirmation.</p>
+      <p><strong>Q: Can I upgrade later?</strong><br>A: Yes, you can upgrade your plan anytime.</p>
+    </div>
+
+    <!-- 🔗 Social Links -->
+    <div class="footer">
+      <div class="social">
+        <a href="https://m.me/YourPage" target="_blank">💬 Messenger</a>
+        <a href="https://t.me/YourTelegramBot" target="_blank">📲 Telegram</a>
+      </div>
     </div>
   </div>
 
   <script>
-    const languages = {
-      en: {
-        title: "🔥 Choose Your VPS Plan",
-        orderTelegram: "Order via Telegram",
-        contactHours: "💬 Contact Hours: 8AM - 8PM",
-        truemoney: "Number:",
-        binance: "Binance ID:",
-        scanQR: "OR scan QR below:",
-        plans: [
-          { name: "Basic", spec: "1 CPU • 1 GB RAM", storage: "25 GB SSD • Unlimited Bandwidth", price: "฿300" },
-          { name: "Standard", spec: "2 CPU • 2 GB RAM", storage: "50 GB SSD • Unlimited Bandwidth", price: "฿380" },
-          { name: "Pro", spec: "4 CPU • 4 GB RAM", storage: "80 GB SSD • Unlimited Bandwidth", price: "฿490" },
-          { name: "Business", spec: "6 CPU • 8 GB RAM", storage: "160 GB SSD • Unlimited Bandwidth", price: "฿790" },
-          { name: "Ultra", spec: "8 CPU • 12 GB RAM", storage: "240 GB SSD • Unlimited Bandwidth", price: "฿1150" },
-          { name: "Extreme", spec: "12 CPU • 16 GB RAM", storage: "320 GB SSD • Unlimited Bandwidth", price: "฿1490" },
-          { name: "Game Plan", spec: "6 CPU • 12 GB RAM", storage: "100 GB SSD • Unlimited Bandwidth", price: "฿690" },
-        ]
-      },
-      th: {
-        title: "🔥 เลือกแผน VPS ของคุณ",
-        orderTelegram: "สั่งซื้อผ่าน Telegram",
-        contactHours: "💬 ติดต่อได้เวลา 8AM - 8PM",
-        truemoney: "หมายเลข:",
-        binance: "รหัส Binance:",
-        scanQR: "หรือสแกน QR ด้านล่าง:",
-        plans: [
-          { name: "Basic", spec: "1 CPU • 1 GB RAM", storage: "25 GB SSD • ไม่จำกัดแบนด์วิดท์", price: "฿300" },
-          { name: "Standard", spec: "2 CPU • 2 GB RAM", storage: "50 GB SSD • ไม่จำกัดแบนด์วิดท์", price: "฿380" },
-          { name: "Pro", spec: "4 CPU • 4 GB RAM", storage: "80 GB SSD • ไม่จำกัดแบนด์วิดท์", price: "฿490" },
-          { name: "Business", spec: "6 CPU • 8 GB RAM", storage: "160 GB SSD • ไม่จำกัดแบนด์วิดท์", price: "฿790" },
-          { name: "Ultra", spec: "8 CPU • 12 GB RAM", storage: "240 GB SSD • ไม่จำกัดแบนด์วิดท์", price: "฿1150" },
-          { name: "Extreme", spec: "12 CPU • 16 GB RAM", storage: "320 GB SSD • ไม่จำกัดแบนด์วิดท์", price: "฿1490" },
-          { name: "Game Plan", spec: "6 CPU • 12 GB RAM", storage: "100 GB SSD • ไม่จำกัดแบนด์วิดท์", price: "฿690" },
-        ]
-      },
-      mm: {
-        title: "🔥 မင်းအတွက် VPS Plan ရွေးပါ",
-        orderTelegram: "Telegram နဲ့ မှာယူပါ",
-        contactHours: "💬 ဆက်သွယ်နိုင်ချိန် (မနက် 8 - ည 8)",
-        truemoney: "နံပါတ်:",
-        binance: "Binance ID:",
-        scanQR: "သို့မဟုတ် QR ကို စကန်လုပ်ပါ:",
-        plans: [
-          { name: "Basic", spec: "1 CPU • 1 GB RAM", storage: "25 GB SSD • အမေရိကန်မည့်သုံးနိုင်", price: "฿300" },
-          { name: "Standard", spec: "2 CPU • 2 GB RAM", storage: "50 GB SSD • အမေရိကန်မည့်သုံးနိုင်", price: "฿380" },
-          { name: "Pro", spec: "4 CPU • 4 GB RAM", storage: "80 GB SSD • အမေရိကန်မည့်သုံးနိုင်", price: "฿490" },
-          { name: "Business", spec: "6 CPU • 8 GB RAM", storage: "160 GB SSD • အမေရိကန်မည့်သုံးနိုင်", price: "฿790" },
-          { name: "Ultra", spec: "8 CPU • 12 GB RAM", storage: "240 GB SSD • အမေရိကန်မည့်သုံးနိုင်", price: "฿1150" },
-          { name: "Extreme", spec: "12 CPU • 16 GB RAM", storage: "320 GB SSD • အမေရိကန်မည့်သုံးနိုင်", price: "฿1490" },
-          { name: "Game Plan", spec: "6 CPU • 12 GB RAM", storage: "100 GB SSD • အမေရိကန်မည့်သုံးနိုင်", price: "฿690" },
-        ]
+    // 🌙 Dark Mode Persistence
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+      localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+    }
+    // Restore mode on load
+    window.onload = () => {
+      if (localStorage.getItem("darkMode") === "true") {
+        document.body.classList.add("dark-mode");
       }
     };
-
-    let currentLang = localStorage.getItem("lang") || "en";
-    function switchLanguage() {
-      const keys = Object.keys(languages);
-      const next = keys[(keys.indexOf(currentLang) + 1) % keys.length];
-      localStorage.setItem("lang", next);
-      currentLang = next;
-      renderLanguage();
-    }
-
-    function renderLanguage() {
-      const lang = languages[currentLang];
-      document.getElementById("header-title").textContent = lang.title;
-      document.querySelector('[data-lang="orderTelegram"]').textContent = lang.orderTelegram;
-      document.querySelector('[data-lang="contactHours"]').textContent = lang.contactHours;
-      document.querySelector('[data-lang="truemoney"]').textContent = lang.truemoney;
-      document.querySelector('[data-lang="binance"]').textContent = lang.binance;
-      document.querySelectorAll('[data-lang="scanQR"]').forEach(e => e.textContent = lang.scanQR);
-
-      const plansContainer = document.getElementById("plans");
-      plansContainer.innerHTML = "";
-      lang.plans.forEach(plan => {
-        const div = document.createElement("div");
-        div.className = "card";
-        div.innerHTML = `
-          <h2>${plan.name}</h2>
-          <p>${plan.spec}</p>
-          <p>${plan.storage}</p>
-          <p>📍 🇹🇭 Thailand</p>
-          <p class="price">${plan.price}</p>
-          <button class="buy-btn" onclick="orderPlan('${plan.name}')">Buy Now</button>
-        `;
-        plansContainer.appendChild(div);
-      });
-    }
-
-    function orderPlan(plan) {
-      const telegram = "https://t.me/Pussy1990";
-      const message = encodeURIComponent(`Hi, I want to order the "${plan}" VPS plan.`);
-      window.open(`${telegram}?text=${message}`, "_blank");
-    }
-
-    function toggleTheme() {
-      const html = document.documentElement;
-      const current = html.getAttribute("data-theme");
-      const next = current === "light" ? "dark" : "light";
-      html.setAttribute("data-theme", next);
-      localStorage.setItem("theme", next);
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      document.documentElement.setAttribute("data-theme", localStorage.getItem("theme") || "light");
-      currentLang = localStorage.getItem("lang") || "en";
-      renderLanguage();
-    });
   </script>
 </body>
 </html>
